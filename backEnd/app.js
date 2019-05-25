@@ -3,8 +3,15 @@ const bodyParser = require('body-parser');
 const mysql = require('promise-mysql');
 const cors = require('cors')
 
+
+var proprietor = require('./proprietor')
+
+
 const app = express();
 const port = 5000|process.env.PORT ;
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -19,18 +26,20 @@ var pool = mysql.createPool({
 });
 
 
-
+app.use('/proprietor',proprietor);
 
 app.get('/', (req,res)=>{
     res.send("hello");
 })
 
 
+
 app.post('/',(req,res)=>{
     var {name, password} = req.body;
     pool.query(`INSERT INTO rentalapp.test (name, password) VALUES ('${name}','${password}');`)
     .then(console.log("sccess"))
-    .then( ()=>{res.send(name + " " + password);}
+    .then(
+        res.json({test: "yes"})
     )
     .catch(
         (err)=>{console.log(err);}
