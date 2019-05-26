@@ -4,7 +4,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Welcome from './conponents/WelcomePage/WelcomePage'
-import RentalForm from './conponents/RentalForm/RentalForm'
+import P_rentalForm from './conponents/Proprietor/P_RentalForm/RentalForm'
+import P_register from './conponents/Proprietor/P_RegisterForm/RegisterForm'
 
 
 
@@ -22,8 +23,8 @@ class App extends Component {
     <div className="App">
     <Router>
       <Route exact path="/" component={Welcome}/>
-      <Route exact path="/porpritor/register" component={RentalForm}/>
-
+      <Route exact path="/porpritor/form" component={P_rentalForm}/>
+      <Route exact path="/porpritor/reg" component={P_register}/>
     </Router>
      
     </div>

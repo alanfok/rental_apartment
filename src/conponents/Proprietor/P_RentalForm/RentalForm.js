@@ -18,7 +18,8 @@ export class RentalForm extends Component {
             size : 3,
             price: "",
             pet: false,
-            smoke: false
+            smoke: false,
+            comment:""
         }
     }
 
@@ -53,7 +54,8 @@ export class RentalForm extends Component {
             size: this.state.size,
             price: this.state.price,
             pet: this.state.pet,
-            smoke: this.state.smoke
+            smoke: this.state.smoke,
+            comment: this.state.comment
         })
         .catch((err)=>console.log(err))
     }
@@ -100,7 +102,11 @@ export class RentalForm extends Component {
                         <Input type="checkbox" checked={this.state.smoke} onClick={this.smokeAllowHandler}></Input>smoke allow
                         </span>           
                         <br></br>
-                        <Button onClick={this.sumbitHandler}>Submit</Button>    
+                        <br></br>
+                        <Label>Comment</Label>
+                        <Input type="textarea" onChange={(e)=>{this.setState({comment: e.target.value})}} value={ this.state.comment} rows="4"></Input>
+                        <br/>
+                        <Button onClick={this.sumbitHandler}  >Submit</Button>    
                     </FormGroup>
                 </Form>
             </div>
