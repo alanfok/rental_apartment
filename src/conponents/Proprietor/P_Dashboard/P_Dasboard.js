@@ -20,7 +20,7 @@ class P_Dasboard extends Component {
 
     render() {
         const v = localStorage.getItem("p_username");
-        if(v ==="")
+        if(v ===null)
         {
             return(
                 <div>
