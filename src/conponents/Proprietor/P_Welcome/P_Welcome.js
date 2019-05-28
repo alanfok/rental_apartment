@@ -74,7 +74,7 @@ class P_Welcome extends Component {
               .then(()=>{
                   console.log(this.state.redirect);
                 if(true){
-                    return window.location.replace("/porpritor/p_dashboard")
+                    this.props.history.push('/porpritor/p_dashboard');
                 }
               })
               .catch((err)=>{
