@@ -10,6 +10,14 @@ const reducer =(state = initState,action) =>{
         name: action.name
     }
     }
+    if(action.type === 'GET_P_USER'){
+        return{
+            ...state,
+            name: action.name
+        }
+        }
+    
+
     return state;
 
 }
