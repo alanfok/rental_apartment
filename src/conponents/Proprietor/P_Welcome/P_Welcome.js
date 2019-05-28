@@ -1,23 +1,29 @@
 import React, { Component } from 'react'
 import {Button,Input} from 'reactstrap'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+
 
 import axios from 'axios';
 import './P_Welcome.css'
-import * as actions from'../../action/action'
+import * as actions from'../../../action/action'
 
 class P_Welcome extends Component {
 
-    constructor(props){
+    constructor(props)
+    {
       super(props);
-      this.state ={
+      this.state =
+      {
          username: "",
          password:"",
-         warningmessage: ""
+         warningmessage: "",
+         redirect: false
       }
     }
   
-      closeLoginHandler= ()=>{
+      closeLoginHandler= ()=>
+      {
           document.querySelector('.pw_login').style.display = 'none';
       }
   
@@ -29,10 +35,14 @@ class P_Welcome extends Component {
           this.setState({username: e.target.value});
       }
   
-      passwordHandler = (e)=>{
+      passwordHandler = (e)=>
+      {
           this.setState({password: e.target.value})
       }
-  
+
+      //redirect
+ 
+
       summitHandler = ()=>{
           if(this.state.username ===""){
               this.setState({warningmessage:"username can't be empty"})
@@ -55,18 +65,24 @@ class P_Welcome extends Component {
                   }
                   else
                   {
-                     this.props.get_P_User(response.data.username);
-                     this.props.get_P_Token(response.data.token);
+                      
+                    this.props.get_P_User(response.data.username);
+                    this.props.get_P_Token(response.data.token);
+                    this.setState({redirect: true})
                   }
+              })
+              .then(()=>{
+                  console.log(this.state.redirect);
+                if(true){
+                    return window.location.replace("/porpritor/p_dashboard")
+                }
               })
               .catch((err)=>{
                   console.log(err);
               })
-  
-  
           }
-      }
-  
+        }
+
       render() {
           return (
               <div>
@@ -82,19 +98,15 @@ class P_Welcome extends Component {
                   <div className="pw_login_content">
                       <div className="close"><p className="close_x" onClick={this.closeLoginHandler}>+</p></div>
                       <h2>Login</h2>
+                      <p>{this.state.redirect}</p>
                       <Input className="pw_login_content_input" placeholder="username" type="text" onChange={this.usernameHandler} value={this.state.username}></Input>
                       <Input className="pw_login_content_input" placeholder="password" type="password" onChange={this.passwordHandler} value={this.state.password}></Input>
                       <Button className="pw_login_content_input" color="primary" onClick={this.summitHandler}>Summit</Button>
                   </div>
                       </div>
               </div>
-  
           )
       }
-  
-  
-  
-  
   }
   const mapDispatchToProps=(dispatch)=>
   {

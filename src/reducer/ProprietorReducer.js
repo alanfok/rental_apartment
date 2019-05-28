@@ -1,4 +1,4 @@
-import * as actions from '../conponents/action/action'
+import * as actions from '../action/action'
 
 
 const initState = {
