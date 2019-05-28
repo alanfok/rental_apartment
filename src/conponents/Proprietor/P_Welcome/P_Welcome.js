@@ -69,7 +69,7 @@ class P_Welcome extends Component {
                     this.props.get_P_User(response.data.username);
                     this.props.get_P_Token(response.data.token);
                     this.setState({redirect: true});
-                    localStorage.setItem("p_username" ,response.data.username)
+                    //localStorage.setItem("p_username" ,response.data.username)
                 }
               })
               .then(()=>{

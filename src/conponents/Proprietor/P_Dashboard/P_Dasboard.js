@@ -19,8 +19,8 @@ class P_Dasboard extends Component {
     }
 
     render() {
-        const v = localStorage.getItem("p_username");
-        if(v===null)
+        //const v = localStorage.getItem("p_username");
+        if(this.props.p_username ==="")
         {
             return(
                 <div>
@@ -33,7 +33,7 @@ class P_Dasboard extends Component {
         return (
             <div>
                 <h1>P_Dasboard</h1>
-                {v}
+                
                 <br/>
                 <button onClick={this.logout}>Logout</button>
             </div>
