@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router();
 const mysql = require('promise-mysql');
+const jwt = require('jsonwebtoken');
 
 var pool = mysql.createPool({
     host: 'den1.mysql4.gear.host',
@@ -34,7 +35,7 @@ router.post('/register_pro',(req,res)=>{
 
 
 
-
+//function for register user
  async function add_user(name,email,password,){
   var result = await pool.query(`SELECT username FROM rentalapp.pro_user WHERE username = '${name}';`);
   if(result == ""){
@@ -45,4 +46,66 @@ router.post('/register_pro',(req,res)=>{
     return "has_user";
   }
 }
+
+//login
+router.post('/login',(req,res)=>{
+  const {username,password} = req.body;
+  var  user ={};
+  
+  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
+  .then(
+    (row)=>{
+            if(row.leght = 0){
+                res.json({hasUser: false})
+            }
+            else{
+              user = JSON.parse(JSON.stringify(row[0]));
+              var username = row[0].username;
+              jwt.sign({user},"secretkey",
+              (err,token)=>{
+                res.json({
+                  username : username,
+                  hasUser: true,
+                  token
+                })
+              }
+              )
+            }
+    }
+  )
+  
+  //res.json()
+  
+  });
+  
+  
+  
+  router.post('/test',verifyToken,(req,res)=>{
+    jwt.verify(req.token, 'secretkey' , (err,authData)=>{
+      if(err){
+        res.sendStatus(403);
+      }
+      else{
+        res.json({
+          message:"test",
+          authData
+      })
+      }
+    });
+  })
+  
+  function verifyToken(req,res,next) {
+    //Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    if(typeof bearerHeader !== 'undefined'){
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    } else{
+      res.sendStatus(403);
+    }
+  
+  }
+
 module.exports = router;
