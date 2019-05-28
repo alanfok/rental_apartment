@@ -1,25 +1,30 @@
+import * as actions from '../conponents/action/action'
+
+
 const initState = {
-    name: ""
+    name: "",
+    token: ""
 }
 
 const reducer =(state = initState,action) =>{
     
-    if(action.type === 'UPDATE_A'){
-    return{
-        ...state,
-        name: action.name
-    }
-    }
-    if(action.type === 'GET_P_USER'){
+    switch(action.type)
+    {
+        case actions.GET_P_USER:
         return{
-            ...state,
-            name: action.name
+        ...state,
+        name:action.name
         }
+        case actions.GET_P_TOKEN:
+        {
+            return{
+                ...state,
+                token: action.value
+            }
         }
-    
-
-    return state;
-
+        default:
+            return state;
+    }
 }
 
 export default reducer;

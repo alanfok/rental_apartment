@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import axios from 'axios';
 import './P_Welcome.css'
+import * as actions from'../../action/action'
 
 class P_Welcome extends Component {
 
@@ -55,6 +56,7 @@ class P_Welcome extends Component {
                   else
                   {
                      this.props.get_P_User(response.data.username);
+                     this.props.get_P_Token(response.data.token);
                   }
               })
               .catch((err)=>{
@@ -97,7 +99,8 @@ class P_Welcome extends Component {
   const mapDispatchToProps=(dispatch)=>
   {
       return{
-      get_P_User : (event) =>dispatch({type: 'GET_P_USER',name: event})
+      get_P_User : (event) =>dispatch({type: actions.GET_P_USER,name: event}),
+      get_P_Token: (event)=>dispatch({type: actions.GET_P_TOKEN,value : event})
       }
   }
   
