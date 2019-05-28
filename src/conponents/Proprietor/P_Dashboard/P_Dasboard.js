@@ -5,10 +5,22 @@ class P_Dasboard extends Component {
     constructor(props){
         super(props);
         this.state = {
+            p_username :""
         }
     }
+
+    logout = () =>{
+        localStorage.removeItem("p_username");
+        this.props.history.push('/');
+    }
+
+    componentWillMount(){
+        this.setState({p_username : this.props.p_username})
+    }
+
     render() {
-        if(this.props.p_username ==="")
+        const v = localStorage.getItem("p_username");
+        if(v===null)
         {
             return(
                 <div>
@@ -16,18 +28,23 @@ class P_Dasboard extends Component {
                 </div>
             )
         }
-        else
-        {
+       else
+       {
         return (
             <div>
-                
                 <h1>P_Dasboard</h1>
-                {this.props.p_username}
+                {v}
+                <br/>
+                <button onClick={this.logout}>Logout</button>
             </div>
         )
-        }
+    }
+
     }
 }
+
+
+
 
 const mapStateToProps = (store) =>{
     return{

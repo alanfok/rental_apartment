@@ -68,12 +68,12 @@ class P_Welcome extends Component {
                       
                     this.props.get_P_User(response.data.username);
                     this.props.get_P_Token(response.data.token);
-                    this.setState({redirect: true})
-                  }
+                    this.setState({redirect: true});
+                    localStorage.setItem("p_username" ,response.data.username)
+                }
               })
               .then(()=>{
-                  console.log(this.state.redirect);
-                if(true){
+                if(true){               
                     this.props.history.push('/porpritor/p_dashboard');
                 }
               })
