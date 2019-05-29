@@ -52,9 +52,13 @@ export class Pro_Login_Conponent extends Component {
                 {            
                   //this.props.get_P_User(response.data.username);
                   //this.props.get_P_Token(response.data.token);
-                  this.setState({redirect: true});
+ 
                   localStorage.setItem("p_username" ,response.data.username)
               }
+            })
+            .then(()=>
+            {
+                this.setState({redirect: true});
             })
             // .then(()=>{
             //   if(this.state.redirect){  
