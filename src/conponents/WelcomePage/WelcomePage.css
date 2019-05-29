@@ -16,17 +16,18 @@
     height: 200%;
     background-color: rgba(0, 0, 0, 0.7);
     top: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     
 }
 .w_proprietor_login_content
 {
-    margin-top: 40%;
+    margin-top: 20%;
     background-color: white;
     height: 20%;
     width: 40%;
     position: relative;
+    padding: 1%
 }
 
 .w_proprietor_close

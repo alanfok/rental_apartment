@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+
 import {Form, FormGroup,Label,Input,Button} from 'reactstrap'
 
 import axios from 'axios';
-import './RegisterForm.css'
+import './Pro_Signup_Conponent.css'
 
-
-export default class RegisterForm extends Component {
+export default class Pro_Signup_Conponent extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -13,10 +13,10 @@ export default class RegisterForm extends Component {
             email:"",
             password: "",
             re_password:"",
-            req_name:"input",
-            req_email:"input",
-            req_password:"input",
-            req_re_password:"input",
+            req_name:"pro_signup_conponent_input",
+            req_email:"pro_signup_conponent_input",
+            req_password:"pro_signup_conponent_input",
+            req_re_password:"pro_signup_conponent_input",
             result:""
         }
     }
@@ -25,16 +25,16 @@ export default class RegisterForm extends Component {
 
             if(this.state.username==="")
             {
-                this.setState({req_name: "input_required"})
+                this.setState({req_name: "pro_signup_conponent_input_required"})
             }
             else if(this.state.email===""){
-                this.setState({req_email: "input_required"})       
+                this.setState({req_email: "pro_signup_conponent_input_required"})       
             }
             else if(this.state.password===""||this.state.password!==this.state.re_password){
-                this.setState({req_password: "input_required"})     
+                this.setState({req_password: "pro_signup_conponent_input_required"})     
             }
             else if(this.state.re_password===""||this.state.password!==this.state.re_password){
-                this.setState({req_re_password: "input_required"})    
+                this.setState({req_re_password: "pro_signup_conponent_input_required"})    
             }
             else{
                 axios.post('http://localhost:5000/proprietor/register_pro',{
@@ -51,10 +51,10 @@ export default class RegisterForm extends Component {
 
     render() {   
         return (
-            <div className="retalFormbg">
+            <div className="pro_signup_conponent_bg">
                 <h1>Proprieor RegisterForm</h1>
                 
-                <Form className="retalForm">
+                <Form >
                     <FormGroup>
                         <Label className='lable'>Username</Label>
                         <br/>
@@ -65,18 +65,21 @@ export default class RegisterForm extends Component {
                         <input className={this.state.req_email} placeholder = "e-mail" type="email" onChange={(e)=>{this.setState({email: e.target.value})}} value={this.state.email} ></input>
                         <br/>  
                         <Label className='lable'>password</Label>
+                        <br/>
                         <input className={this.state.req_password} placeholder = "password" type="password" onChange={(e)=>{this.setState({password: e.target.value})}} value={this.state.password} ></input>
+                        <br/>
                         <Label className='lable'>re-password</Label>
+                        <br/>
                         <input className={this.state.req_re_password} placeholder = "re-password" type="password" onChange={(e)=>{this.setState({re_password: e.target.value})}} value={this.state.re_password}></input>    
                         <br/>              
                         <br/>     
-                        <Button onClick={this.registerHandler}  >Register</Button>    
+                        <button onClick={this.registerHandler}  >Register</button>    
                         <br/>
                         <p>{this.state.result}</p>
                     </FormGroup>
                 </Form>
             </div>
         )
-
     }
 }
+

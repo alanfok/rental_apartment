@@ -4,15 +4,25 @@ import {Link} from 'react-router-dom';
  
 import Slide from '../WelcomePageSlide/WelcomePageSlide'
 import PLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
+import PSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
 
 import "./WelcomePage.css"
 
 
-export default class WelcomePage extends Component {
 
+class WelcomePage extends Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            toggle: false
+        }
+    }
 
     PLoginCloseHandler = () =>{
+        this.setState({toggle: false})
         document.querySelector(".w_proprietor_login_backgroup").style.display= "none";
+        document.querySelector(".w_proprietor_login_content").style.height ="20%"
     }
     
     PLoginOpenHandler = () =>{
@@ -20,7 +30,16 @@ export default class WelcomePage extends Component {
     }
 
     toggleHandler = () =>{
-        alert("fdafsa")
+        var v = this.state.toggle
+        this.setState({toggle: !v})
+        if(!this.state.toggle)
+        {
+            document.querySelector(".w_proprietor_login_content").style.height ="30%"
+        }
+        else
+        {
+            document.querySelector(".w_proprietor_login_content").style.height ="20%"
+        }
     }
 
 
@@ -29,9 +48,11 @@ export default class WelcomePage extends Component {
         return (
             <div>
                 <Slide/>
+
                 <h1>
                     Welcome
                 </h1>
+                <div className="w_button_group">
                     <button className="w_button" onClick={this.PLoginOpenHandler}>Looking for client...</button>
                     {/*
                     <Link to="/porpritor/welcome"><button className="w_button" >Looking for client...</button></Link>
@@ -43,11 +64,14 @@ export default class WelcomePage extends Component {
                     <div className="w_proprietor_login_backgroup">
                         <div className="w_proprietor_login_content">
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
-                            <PLOGIN childTroggle={this.toggleHandler}/>
+                            {(this.state.toggle)?<PSINGUP/>:<PLOGIN childTroggle={this.toggleHandler}/>}
                         </div>
                     </div>
+                </div>
     
             </div>
         )
     }
 }
+
+export default WelcomePage;
