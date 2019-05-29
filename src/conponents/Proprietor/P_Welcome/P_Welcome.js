@@ -57,7 +57,7 @@ class P_Welcome extends Component {
                   username: this.state.username,
                   password: this.state.password
               })
-              .then((response)=>{
+              .then((response)=>{//return from back-end
                   var hasUser = response.data.hasUser;
                   if(!hasUser)
                   {
@@ -72,7 +72,8 @@ class P_Welcome extends Component {
                 }
               })
               .then(()=>{
-                if(true){               
+                if(this.state.redirect){  
+                    //this.redirectHandler();            
                     this.props.history.push('/porpritor/p_dashboard');
                 }
               })
@@ -81,6 +82,7 @@ class P_Welcome extends Component {
               })
           }
         }
+
 
       render() {
           return (

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
+
 class P_Dasboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            p_username :""
+            p_username : localStorage.getItem("p_username")
         }
     }
 
@@ -14,9 +15,13 @@ class P_Dasboard extends Component {
         this.props.history.push('/');
     }
 
-    componentWillMount(){
-        this.setState({p_username : this.props.p_username})
+    componentDidMount(){
+      
     }
+
+
+
+ 
 
     render() {
         const v = localStorage.getItem("p_username");
@@ -33,7 +38,7 @@ class P_Dasboard extends Component {
         return (
             <div>
                 <h1>P_Dasboard</h1>
-                
+                {this.state.p_username}
                 <br/>
                 <button onClick={this.logout}>Logout</button>
             </div>

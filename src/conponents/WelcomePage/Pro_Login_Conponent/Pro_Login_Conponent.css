@@ -1,0 +1,14 @@
+.pro_login_conponenet_bg{
+    padding-top: 5%;
+}
+
+.pro_login_conponenet_input{
+    margin-top: 3%;
+    padding-right: 30%;
+    padding-left: 1%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: left;
+    border: 1px solid rgb(138, 137, 137);
+    border-radius: 15px;
+}
