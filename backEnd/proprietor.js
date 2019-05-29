@@ -51,18 +51,22 @@ router.post('/register_pro',(req,res)=>{
 router.post('/login',(req,res)=>{
   const {username,password} = req.body;
   var  user ={};
-  
+
   pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
   .then(
-    (row)=>{
-            if(row.leght = 0){
+    (row)=>
+          {
+            if(row.length < 1)
+            {
                 res.json({hasUser: false})
             }
-            else{
+            else
+            {
               user = JSON.parse(JSON.stringify(row[0]));
               var username = row[0].username;
               jwt.sign({user},"secretkey",
-              (err,token)=>{
+              (err,token)=>
+              {
                 res.json({
                   username : username,
                   hasUser: true,
@@ -71,7 +75,7 @@ router.post('/login',(req,res)=>{
               }
               )
             }
-    }
+          }
   )
   
   //res.json()

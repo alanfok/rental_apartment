@@ -27,7 +27,19 @@
     height: 20%;
     width: 40%;
     position: relative;
-    padding: 1%
+    padding: 1%;
+}
+
+.w_proprietor_login_content_2
+{
+    margin-top: 20%;
+    background-color: white;
+    height: 20%;
+    width: 40%;
+    position: relative;
+    padding: 1%;
+    resize: both;
+    overflow: auto;
 }
 
 .w_proprietor_close

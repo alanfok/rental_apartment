@@ -13,7 +13,10 @@ export class Pro_Login_Conponent extends Component {
         {
             username: "",
             password:"",
-            redirect: false
+            redirect: false,
+            warningmessage:"",
+            hasUser:false
+            
         }
     }
 
@@ -58,7 +61,10 @@ export class Pro_Login_Conponent extends Component {
             })
             .then(()=>
             {
+                if(this.state.hasUser)
+                {
                 this.setState({redirect: true});
+                }
             })
             // .then(()=>{
             //   if(this.state.redirect){  
