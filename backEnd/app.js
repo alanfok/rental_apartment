@@ -2,19 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('promise-mysql');
 const cors = require('cors')
-// const https = require('https')
-// const fs = require('fs')
+
 
 var proprietor = require('./proprietor')
- 
-// var options = {
-//     key: fs.readFileSync('./security/key.pem'),
-//     cert: fs.readFileSync('./security/key-cert.pem')
-//   };
-  
+
 
 const app = express();
-const port = process.env.PORT||5000 ;
+const port = 5000|process.env.PORT ;
 
 
 
@@ -52,12 +46,6 @@ app.post('/',(req,res)=>{
     )
     
 })
-
-
-// https.createServer(options, function (req, res) {
-//     res.writeHead(200);
-//     res.end("hello world\n");
-//   }).listen(port);
 
 app.listen(port, ()=>{
     console.log("it's running on port "+ port)
