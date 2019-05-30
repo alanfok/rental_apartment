@@ -49,18 +49,18 @@ export class Pro_Login_Conponent extends Component {
                 password: this.state.password
             })
             .then((response)=>{//return from back-end
-                this.setState({ spinner: false })
                 var hasUser = response.data.hasUser;
                 console.log(hasUser)
                 if(!hasUser)
                 {
+                    this.setState({ spinner: false })
                     this.setState({warningmessage: "we don't have this user"})
                 }
                 else
                 {            
                   //this.props.get_P_User(response.data.username);
                   //this.props.get_P_Token(response.data.token);
- 
+                  this.setState({ spinner: false })
                   localStorage.setItem("p_username" ,response.data.username)
                   this.setState({redirect : true})
               }
