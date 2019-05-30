@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 
 
 class P_Dasboard extends Component {
@@ -41,6 +42,7 @@ class P_Dasboard extends Component {
                 {this.state.p_username}
                 <br/>
                 <button onClick={this.logout}>Logout</button>
+                <Link to="/porpritor/form"><button>Register Apartment</button></Link>
             </div>
         )
     }
