@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
-
+import { Spinner} from 'reactstrap'
 import axios from 'axios';
 import "./Pro_Login_Conponent.css";
 
@@ -15,7 +15,8 @@ export class Pro_Login_Conponent extends Component {
             password:"",
             redirect: false,
             warningmessage:"",
-            hasUser:false          
+            hasUser:false,
+            spinner: false      
         }
     }
 
@@ -31,11 +32,14 @@ export class Pro_Login_Conponent extends Component {
 
     LoginHandler = () =>
     {
+        this.setState({ spinner: true })
         if(this.state.username ===""){
+            this.setState({ spinner: false });
             this.setState({warningmessage:"username can't be empty"})
         }
         else if(this.state.password ==="")
         {
+            this.setState({ spinner: false });
             this.setState({warningmessage:"password can't be empty"})
         }
         else
@@ -45,6 +49,7 @@ export class Pro_Login_Conponent extends Component {
                 password: this.state.password
             })
             .then((response)=>{//return from back-end
+                this.setState({ spinner: false })
                 var hasUser = response.data.hasUser;
                 console.log(hasUser)
                 if(!hasUser)
@@ -77,6 +82,7 @@ export class Pro_Login_Conponent extends Component {
                 <input className="pro_login_conponenet_input" placeholder="Passwork" onChange={this.passworkHandler}></input>
                 <br/>
                 <p>{this.state.warningmessage}</p>
+                <p>{(this.setState.spinner)?<Spinner size="sm" color="primary" />:" "}</p>
                 <button className="pro_login_conponenet_button" onClick={this.LoginHandler}>Login</button><button className="pro_login_conponenet_button" onClick={this.props.childTroggle}>Signup</button>
             </div>
         )
