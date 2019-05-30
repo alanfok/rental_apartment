@@ -36,5 +36,6 @@
   },
   "main": "index.js",
   "author": "alan <alan606@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "proxy":"http://localhost:5000"
 }
