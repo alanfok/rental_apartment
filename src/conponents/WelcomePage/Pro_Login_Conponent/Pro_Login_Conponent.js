@@ -15,8 +15,7 @@ export class Pro_Login_Conponent extends Component {
             password:"",
             redirect: false,
             warningmessage:"",
-            hasUser:false
-            
+            hasUser:false          
         }
     }
 
@@ -47,6 +46,7 @@ export class Pro_Login_Conponent extends Component {
             })
             .then((response)=>{//return from back-end
                 var hasUser = response.data.hasUser;
+                console.log(hasUser)
                 if(!hasUser)
                 {
                     this.setState({warningmessage: "we don't have this user"})
@@ -57,42 +57,27 @@ export class Pro_Login_Conponent extends Component {
                   //this.props.get_P_Token(response.data.token);
  
                   localStorage.setItem("p_username" ,response.data.username)
+                  this.setState({redirect : true})
               }
             })
-            .then(()=>
-            {
-                if(this.state.hasUser)
-                {
-                this.setState({redirect: true});
-                }
-            })
-            // .then(()=>{
-            //   if(this.state.redirect){  
-            //       this.redirectHandler();    
-            //       console.log("test")        
-            //       this.props.history.push('/porpritor/p_dashboard');
-            //   }
-            // })
             .catch((err)=>{
                 console.log(err);
             })
         }
     }
 
-
-
-
     render() {
         return (
             <div className="pro_login_conponenet_bg">
+               
                {(this.state.redirect)?<Redirect to="/porpritor/p_dashboard"/>:null}
                 <h3 >Proprietor Login</h3>
                 <input className="pro_login_conponenet_input" placeholder="Username" onChange={this.usernameHandler}></input>
                 <br/>
                 <input className="pro_login_conponenet_input" placeholder="Passwork" onChange={this.passworkHandler}></input>
                 <br/>
-                {this.state.warningmessage}
-                <button onClick={this.LoginHandler}>Login</button><button onClick={this.props.childTroggle}>signup</button>
+                <p>{this.state.warningmessage}</p>
+                <button className="pro_login_conponenet_button" onClick={this.LoginHandler}>Login</button><button className="pro_login_conponenet_button" onClick={this.props.childTroggle}>Signup</button>
             </div>
         )
     }

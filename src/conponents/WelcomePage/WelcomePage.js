@@ -24,32 +24,16 @@ class WelcomePage extends Component {
     PLoginCloseHandler = () =>{
         this.setState({toggle: false})
         document.querySelector(".w_proprietor_login_backgroup").style.display= "none";
-        if(this.state.width>1225){
-        document.querySelector(".w_proprietor_login_content").style.height ="20%"
-        }
     }
     
     PLoginOpenHandler = () =>{
+        document.querySelector(".w_proprietor_login_backgroup").style.height= `${this.state.height}px`;
         document.querySelector(".w_proprietor_login_backgroup").style.display= "flex";
     }
 
     toggleHandler = () =>{
         var v = this.state.toggle
         this.setState({toggle: !v})
-        if(!this.state.toggle)
-        {
-            if(this.state.width>1225)
-            {
-            document.querySelector(".w_proprietor_login_content").style.height ="30%"
-            }
-        }
-        else
-        {
-            if(this.state.width>1225)
-            {
-            document.querySelector(".w_proprietor_login_content").style.height ="20%"
-            }
-        }
     }
 
 
@@ -62,14 +46,16 @@ class WelcomePage extends Component {
     componentWillMount()
     {
         window.addEventListener('resize',this.reSizeHandler);
+        
+        
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.reSizeHandler);
       }
 
-    render() {
-        var {width} = this.state;
 
+
+    render() {
 
         return (
             <div>
@@ -80,20 +66,14 @@ class WelcomePage extends Component {
                     <Link to="/porpritor/welcome"><button className="w_button" >Looking for client...</button></Link>
                     */
                     }
-                    <Link to="/"><button className="w_button">Looking for apartment...</button></Link>
-                    
-                    { 
-                        /** p_login conpontent*/}
-
-                    {
-                        
+                    <Link to="/"><button className="w_button">Looking for apartment...</button></Link>             
+                    { /** p_login conpontent*/}
                     <div className="w_proprietor_login_backgroup">
                         <div className={(this.state.width>1225)?"w_proprietor_login_content":"w_proprietor_login_content_2"}>
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
                             {(this.state.toggle)?<PSINGUP/>:<PLOGIN childTroggle={this.toggleHandler}/>}
                         </div>
                     </div>
-                    }
                 </div>
                     
 
