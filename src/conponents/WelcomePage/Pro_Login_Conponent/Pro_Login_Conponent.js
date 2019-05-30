@@ -82,7 +82,7 @@ export class Pro_Login_Conponent extends Component {
                 <input className="pro_login_conponenet_input" placeholder="Passwork" onChange={this.passworkHandler}></input>
                 <br/>
                 <p>{this.state.warningmessage}</p>
-                <p>{(this.state.spinner)?<Spinner size="sm" color="primary" />:" "}</p>
+                <p>{(this.setState.spinner)?<Spinner size="sm" color="primary" />:" "}</p>
                 <button className="pro_login_conponenet_button" onClick={this.LoginHandler}>Login</button><button className="pro_login_conponenet_button" onClick={this.props.childTroggle}>Signup</button>
             </div>
         )
