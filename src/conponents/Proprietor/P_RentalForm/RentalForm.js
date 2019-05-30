@@ -47,7 +47,7 @@ export class RentalForm extends Component {
     }
 
     sumbitHandler =()=>{
-        axois.post('http://localhost:5000/proprietor/registerform',
+        axois.post('/proprietor/registerform',
         {
             n_apt: this.state.n_apt,
             s_street: this.state.s_street,
