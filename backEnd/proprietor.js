@@ -51,7 +51,6 @@ router.post('/register_pro',(req,res)=>{
 router.post('/login',(req,res)=>{
   const {username,password} = req.body;
   var  user ={};
-console.log(username,password)
   pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
   .then(
     (row)=>
