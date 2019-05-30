@@ -28,7 +28,7 @@ var pool = mysql.createPool({
 
 app.use('/proprietor',proprietor);
 
-app.get('/', (req,res)=>{
+app.get('/fd', (req,res)=>{
     res.send("hello");
 })
 
