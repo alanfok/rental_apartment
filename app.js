@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('promise-mysql');
 const cors = require('cors')
-
+const path = require('path');
 
 var proprietor = require('./proprietor')
 
@@ -10,7 +10,7 @@ var proprietor = require('./proprietor')
 const app = express();
 const port = process.env.PORT||5000 ;
 
-
+app.use(express.static(path.join(__dirname, 'frontEnd/build')));
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -26,7 +26,7 @@ var pool = mysql.createPool({
 });
 
 
-app.use('/proprietor',proprietor);
+app.use('/api/proprietor',proprietor);
 
 app.get('/fd', (req,res)=>{
     res.send("hello");

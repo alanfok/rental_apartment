@@ -44,7 +44,7 @@ export class Pro_Login_Conponent extends Component {
         }
         else
         {
-            axios.post('/proprietor/login',{
+            axios.post('/api/proprietor/login',{
                 username: this.state.username,
                 password: this.state.password
             })

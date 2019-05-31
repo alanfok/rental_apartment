@@ -37,7 +37,7 @@ export default class Pro_Signup_Conponent extends Component {
                 this.setState({req_re_password: "pro_signup_conponent_input_required"})    
             }
             else{
-                axios.post('/proprietor/register_pro',{
+                axios.post('api/proprietor/register_pro',{
                     username: this.state.username,
                     email: this.state.email,
                     password: this.state.password
