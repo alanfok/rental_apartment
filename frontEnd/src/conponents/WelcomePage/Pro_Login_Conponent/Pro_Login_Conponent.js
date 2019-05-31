@@ -77,9 +77,9 @@ export class Pro_Login_Conponent extends Component {
                
                {(this.state.redirect)?<Redirect to="/porpritor/p_dashboard"/>:null}
                 <h3 >Proprietor Login</h3>
-                <input className="pro_login_conponenet_input" placeholder="Username" onChange={this.usernameHandler}></input>
+                <input className="pro_login_conponenet_input" placeholder="Username" type="text" onChange={this.usernameHandler}></input>
                 <br/>
-                <input className="pro_login_conponenet_input" placeholder="Passwork" onChange={this.passworkHandler}></input>
+                <input className="pro_login_conponenet_input" placeholder="Passwork" type="password" onChange={this.passworkHandler}></input>
                 <br/>
                 <p>{this.state.warningmessage}</p>
                 <p>{(this.state.spinner)?<Spinner size="sm" color="primary" />:" "}</p>
