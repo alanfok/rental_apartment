@@ -1,0 +1,65 @@
+.w_button{
+    margin: 5% 2%;
+    background-color: inherit;
+    border: 2px solid red;
+    border-radius: 20px;
+    color: red;
+    padding: 2% 5%;
+}
+.w_button:focus{
+    outline:0;
+}
+
+.w_proprietor_login_backgroup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    bottom: 0;
+    display: none;
+}
+.w_proprietor_login_content
+{
+    margin-top: 20%;
+    background-color: white;
+    margin: auto;
+    width: 40%;
+    position: relative;
+    padding: 1%;
+}
+
+.w_proprietor_login_content_2
+{
+    margin-top: 20%;
+    background-color: white;
+    margin: auto;
+    width: 40%;
+    position: relative;
+    padding: 1%;
+    resize: both;
+    overflow: auto;
+}
+
+.w_proprietor_close
+{
+    position: absolute;
+    top:0px;
+    right: 15px;
+    font-weight: bold;
+    font-size: 5ex;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.w_proprietor_close:focus{
+    outline: 0
+}
+
+.carousel-caption {
+    z-index: 0 !important;
+}
+
+.carousel-indicators{
+    z-index: 0 !important;
+}
