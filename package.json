@@ -1,41 +1,14 @@
 {
-  "name": "rental_appartment",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1",
-    "reactstrap": "^8.0.0",
-    "redux": "^4.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cd backEnd && node app.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "name": "alan",
+  "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://alanfok@github.com/alanfok/rental_apartment.git",
   "author": "alan <alan606@gmail.com>",
-  "license": "MIT"
+  "scripts": {
+    "start" : "concurrently \"cd frontEnd/ && yarn start\" \"cd backEnd/ && node app.js\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
 }
