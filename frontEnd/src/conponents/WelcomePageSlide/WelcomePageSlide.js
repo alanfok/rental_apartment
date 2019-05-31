@@ -60,12 +60,6 @@ class Slide extends Component {
 
       }
 
-    
-        
-  
-    
-
-
 render(){
     if(this.state.slide1Ready&&this.state.slide2Ready&&this.state.slide3Ready)
     {

@@ -16,15 +16,23 @@ class WelcomePage extends Component {
         this.state = {
             toggle: false,
             width: window.innerWidth,
+            isLookforApartment:false
         }
     }
 
     PLoginCloseHandler = () =>{
+        this.setState({isLookforApartment:false})
         this.setState({toggle: false})
         document.querySelector(".w_proprietor_login_backgroup").style.display= "none";
     }
     
     PLoginOpenHandler = () =>{
+        document.querySelector(".w_proprietor_login_backgroup").style.height= `${this.state.height}px`;
+        document.querySelector(".w_proprietor_login_backgroup").style.display= "flex";
+    }
+
+    CLoginOpenHandler = () =>{
+        this.setState({isLookforApartment: true})
         document.querySelector(".w_proprietor_login_backgroup").style.height= `${this.state.height}px`;
         document.querySelector(".w_proprietor_login_backgroup").style.display= "flex";
     }
@@ -61,16 +69,20 @@ class WelcomePage extends Component {
                 <Slide/>
                 <div className="w_button_group">
                     <button className="w_button" onClick={this.PLoginOpenHandler}>Looking for client...</button>
-                    {/*
-                    <Link to="/porpritor/welcome"><button className="w_button" >Looking for client...</button></Link>
-                    */
-                    }
-                    <Link to="/"><button className="w_button">Looking for apartment...</button></Link>             
-                    { /** p_login conpontent*/}
+                    <button className="w_button" onClick={this.CLoginOpenHandler}>Looking for apartment...</button>            
+                    { /** p_login conpontent*/},
                     <div className="w_proprietor_login_backgroup">
-                        <div className={(this.state.width>1225)?"w_proprietor_login_content":"w_proprietor_login_content_2"}>
+                           <div className={(this.state.width>1225)?"w_proprietor_login_content":"w_proprietor_login_content_2"}>
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
+                            {(this.state.isLookforApartment)?                        
+                            <div>{/* login in for look for appartment */}
+                                <h1>fdsaf</h1>
+                            </div>
+                            :
+                            <div>{/* login in for look for client */}
                             {(this.state.toggle)?<PSINGUP/>:<PLOGIN childTroggle={this.toggleHandler}/>}
+                            </div>
+                            }
                         </div>
                     </div>
                 </div>
