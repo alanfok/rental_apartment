@@ -34,7 +34,7 @@ app.get('/fd', (req,res)=>{
 
 
 
-app.post('/',(req,res)=>{
+app.post('/test',(req,res)=>{
     var {name, password} = req.body;
     pool.query(`INSERT INTO rentalapp.test (name, password) VALUES ('${name}','${password}');`)
     .then(console.log("sccess"))
@@ -44,7 +44,6 @@ app.post('/',(req,res)=>{
     .catch(
         (err)=>{console.log(err);}
     )
-    
 })
 
 app.listen(port, ()=>{
