@@ -10,5 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "concurrently": "^4.1.0"
-  }
+  },
+  "heroku-postbuild": "yarn start"
 }
