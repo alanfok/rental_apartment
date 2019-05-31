@@ -36,46 +36,33 @@ class Slide extends Component {
               }
             ],
             slide1Ready: false,
-            slide2Ready: false,
-            slide3Ready: false,
           }
         }
 
-      componentWillMount()
+      componentDidMount()
       {
           var img1 = new Image();
-          img1.src = slide1;
+          img1.src = slide3;
           img1.onload=()=>
           {
              this.setState({slide1Ready: true})
           }
-          var img2 = new Image();
-          img2.src = slide2;
-          img2.onload=()=>
-          {
-             this.setState({slide2Ready: true})
-          }
-          var img3 = new Image();
-          img3.src = slide1;
-          img3.onload=()=>
-          {
-             this.setState({slide3Ready: true})
-          }
+          
       }
 
 render(){
-  if(this.stateslide3Ready&&this.stateslide2Ready&&this.stateslide1Ready)
-  {
-    return(
+    if(this.state.slide1Ready)
+    {
+    return(   
       <UncontrolledCarousel className="wps_" items={this.state.items} />
     )
-  }
-  else
-  {
-    return(
-    <p>LoadingPhoto</p>
-    )
-  }
+    }
+    else
+    {
+      return(
+      <p>thhe photo is loading</p>
+      )
+    }
 }
 
 }
