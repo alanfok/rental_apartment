@@ -64,9 +64,18 @@ class Slide extends Component {
       }
 
 render(){
-  return(
-    <UncontrolledCarousel className="wps_" items={this.state.items} />
-  )
+  if(this.stateslide3Ready&&this.stateslide2Ready&&this.stateslide1Ready)
+  {
+    return(
+      <UncontrolledCarousel className="wps_" items={this.state.items} />
+    )
+  }
+  else
+  {
+    return(
+    <p>LoadingPhoto</p>
+    )
+  }
 }
 
 }
