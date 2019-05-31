@@ -9,7 +9,6 @@ import PSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
 import "./WelcomePage.css"
 
 
-
 class WelcomePage extends Component {
     constructor(props)
     {
@@ -17,7 +16,6 @@ class WelcomePage extends Component {
         this.state = {
             toggle: false,
             width: window.innerWidth,
-            b_pLogin: "w_proprietor_login_backgroup"
         }
     }
 
@@ -47,13 +45,14 @@ class WelcomePage extends Component {
     {
         window.addEventListener('resize',this.reSizeHandler);
         
-        
     }
-    componentWillUnmount() {
+
+
+    componentWillUnmount() 
+    {
         window.removeEventListener('resize', this.reSizeHandler);
-      }
-
-
+    }
+    
 
     render() {
 
