@@ -70,7 +70,7 @@ class WelcomePage extends Component {
                 <div className="w_button_group">
                     <button className="w_button" onClick={this.PLoginOpenHandler}>Looking for client...</button>
                     <button className="w_button" onClick={this.CLoginOpenHandler}>Looking for apartment...</button>            
-                    { /** p_login conpontent*/},
+                    { /** p_login conpontent*/}
                     <div className="w_proprietor_login_backgroup">
                            <div className={(this.state.width>1225)?"w_proprietor_login_content":"w_proprietor_login_content_2"}>
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
