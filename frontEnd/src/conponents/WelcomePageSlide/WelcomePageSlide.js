@@ -4,7 +4,7 @@ import slide1 from '../../photo/slide1.jpg';
 import slide2 from '../../photo/slide2.jpg';
 import slide3 from '../../photo/slide3.jpg';
 import './WelcomePageSlide.css'
-import {Spinner} from 'reactstrap'
+import {Spinner,Label} from 'reactstrap'
 
 
 
@@ -70,14 +70,15 @@ render(){
     if(this.state.slide1Ready&&this.state.slide2Ready&&this.state.slide3Ready)
     {
     return(   
-      <UncontrolledCarousel className="wps_" items={this.state.items} />
+      <UncontrolledCarousel className="wps_" items={this.state.items}/>
     )
     }
     else
     {
       return(
-
-        <Spinner color="primary" style={{ width: '3rem', height: '3rem' }}/>
+        <div>
+        <span>Loading Photo&nbsp;&nbsp;&nbsp;&nbsp;</span><Spinner color="primary" style={{ width: '3rem', height: '3rem' }}/>
+        </div>
       )
     }
 }
