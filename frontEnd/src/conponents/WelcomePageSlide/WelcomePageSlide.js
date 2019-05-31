@@ -39,28 +39,34 @@ class Slide extends Component {
           }
         }
 
-      componentWillMount(){
-        this.Preload();
-      }
-
-      Preload = async() =>{
+      componentDidMount(){
         var img1 = new Image();
         img1.src = slide3;
-         var x =await function x() {
-           img1.onload=()=>
-            {
+        img1.onload=()=>
+        {
            this.setState({slide1Ready: true})
-            }
+        }
       }
-    }
+
+    
+        
+  
+    
 
 
 render(){
-
+    if(this.state.slide1Ready)
+    {
     return(   
       <UncontrolledCarousel className="wps_" items={this.state.items} />
     )
-
+    }
+    else
+    {
+      return(
+        <p></p>
+      )
+    }
 }
 
 }
