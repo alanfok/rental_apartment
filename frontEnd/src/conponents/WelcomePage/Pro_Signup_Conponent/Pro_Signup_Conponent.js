@@ -50,9 +50,10 @@ export default class Pro_Signup_Conponent extends Component {
     }
 
     render() {   
-        return (
+        const{name} = this.props;
+        return (         
             <div className="pro_signup_conponent_bg">
-                <h1>Proprieor RegisterForm</h1>
+                <h1>{name} RegisterForm</h1>
                 
                 <Form >
                     <FormGroup>

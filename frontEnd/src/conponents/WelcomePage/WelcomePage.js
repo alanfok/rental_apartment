@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 import Slide from '../WelcomePageSlide/WelcomePageSlide'
 import PLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
 import PSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
+import CLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
+import CSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
 
 import "./WelcomePage.css"
 
@@ -76,11 +78,11 @@ class WelcomePage extends Component {
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
                             {(this.state.isLookforApartment)?                        
                             <div>{/* login in for look for appartment */}
-                                <h1>fdsaf</h1>
+                                 {(this.state.toggle)?<CSINGUP name="Tenant"/>:<CLOGIN name="Tenant" childTroggle={this.toggleHandler}/>}
                             </div>
                             :
                             <div>{/* login in for look for client */}
-                            {(this.state.toggle)?<PSINGUP/>:<PLOGIN childTroggle={this.toggleHandler}/>}
+                            {(this.state.toggle)?<PSINGUP name="Proprietor"/>:<PLOGIN name="Proprietor" childTroggle={this.toggleHandler}/>}
                             </div>
                             }
                         </div>
