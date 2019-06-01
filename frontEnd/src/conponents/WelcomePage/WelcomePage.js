@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {Button} from 'reactstrap';
+import {Button,Spinner} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
  
 import Slide from '../WelcomePageSlide/WelcomePageSlide'
 import PLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
@@ -18,7 +19,8 @@ class WelcomePage extends Component {
         this.state = {
             toggle: false,
             width: window.innerWidth,
-            isLookforApartment:false
+            isLookforApartment:false,
+            photolooding: true
         }
     }
 
@@ -62,10 +64,18 @@ class WelcomePage extends Component {
     {
         window.removeEventListener('resize', this.reSizeHandler);
     }
-    
 
     render() {
-
+        if(!this.props.welcomeslide)
+        {
+            return(
+                <div>
+                    <Slide></Slide>
+                </div>
+                )
+        }
+        else
+        {
         return (
             <div>
                 <Slide/>
@@ -87,13 +97,18 @@ class WelcomePage extends Component {
                             }
                         </div>
                     </div>
-                </div>
-                    
-
-    
+                </div>  
             </div>
         )
+                        }
     }
 }
 
-export default WelcomePage;
+
+const mapStateToProps = store =>{
+    return {
+        welcomeslide : store.welcome.isPhotoFinishLoading
+    }
+}
+
+export default connect (mapStateToProps) (WelcomePage);
