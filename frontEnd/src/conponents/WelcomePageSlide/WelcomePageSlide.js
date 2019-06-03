@@ -5,6 +5,8 @@ import slide2 from '../../photo/slide2.jpg';
 import slide3 from '../../photo/slide3.jpg';
 import './WelcomePageSlide.css'
 import {Spinner,Label} from 'reactstrap'
+import { connect } from 'react-redux'
+
 
 
 
@@ -60,18 +62,18 @@ class Slide extends Component {
 
       }
 
-    
-        
-  
-    
 
+    
 
 render(){
     if(this.state.slide1Ready&&this.state.slide2Ready&&this.state.slide3Ready)
-    {
+    {  
+      this.props.isPhotoLoading()
     return(   
+      <div>
       <UncontrolledCarousel className="wps_" items={this.state.items}/>
-    )
+      </div>
+   )
     }
     else
     {
@@ -84,4 +86,15 @@ render(){
 }
 
 }
-export default Slide;
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    
+    isPhotoLoading : ()=>dispatch({type:"PhotoFinishLoading",})
+  }
+ 
+
+}
+
+
+export default connect (null,mapDispatchToProps)(Slide);

@@ -5,12 +5,17 @@ const cors = require('cors')
 const path = require('path');
 
 var proprietor = require('./proprietor')
+var tenant = require('./tenant')
 
 
 const app = express();
 const port = process.env.PORT||5000 ;
 
 app.use(express.static(path.join(__dirname, 'frontEnd/build')));
+//refresh
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/frontEnd/build/index.html'));
+  });
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -27,6 +32,7 @@ var pool = mysql.createPool({
 
 
 app.use('/api/proprietor',proprietor);
+app.use('/api/tenant',tenant);
 
 app.get('/fd', (req,res)=>{
     res.send("hello");

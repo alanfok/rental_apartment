@@ -10,10 +10,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';//bootstrap
 
 import tenantreducer from "./reducer/TenantReducer"
 import proprietorreducer from "./reducer/ProprietorReducer"
+import welcomereducer from "./reducer/WelcomePageReducer"
 
 const rootReducer = combineReducers({
     tenant: tenantreducer,
-    proprietor: proprietorreducer
+    proprietor: proprietorreducer,
+    welcome: welcomereducer
 })
 
 const store = createStore(rootReducer,

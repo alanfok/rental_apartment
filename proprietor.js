@@ -25,14 +25,13 @@ router.post('/registerform',(req,res)=>{
   .catch((err)=>{console.log(err)})
 })
 
-router.post('/register_pro',(req,res)=>{
+router.post('/register',(req,res)=>{
   const{username,email,password} = req.body;
   var x = new Promise((resolve,reject)=>{
     resolve(add_user(username,email,password))
   })
   x.then((val)=>res.json(val));
 })
-
 
 
 //function for register user

@@ -7,7 +7,8 @@ class P_Dasboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            p_username : localStorage.getItem("p_username")
+            p_username : localStorage.getItem("p_username"),
+            type: localStorage.getItem("type")
         }
     }
 
@@ -25,8 +26,8 @@ class P_Dasboard extends Component {
  
 
     render() {
-        const v = localStorage.getItem("p_username");
-        if(v ===null)
+        const type = localStorage.getItem("type")
+        if(type ===null)
         {
             return(
                 <div>
@@ -38,7 +39,7 @@ class P_Dasboard extends Component {
        {
         return (
             <div>
-                <h1>P_Dasboard</h1>
+                <h1>{this.state.type}Dasboard</h1>
                 {this.state.p_username}
                 <br/>
                 <button onClick={this.logout}>Logout</button>
