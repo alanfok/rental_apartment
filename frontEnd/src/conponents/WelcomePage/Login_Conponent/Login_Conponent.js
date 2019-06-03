@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
 import { Spinner} from 'reactstrap'
 import axios from 'axios';
-import "./Pro_Login_Conponent.css";
+import "./Login_Conponent.css";
 
 import * as type from "../../../type/type"
 
@@ -58,10 +58,7 @@ export class Pro_Login_Conponent extends Component {
         }
     }
 
-
-
-
-    
+    //PropietorLogin
     proprietorLoginHandler = () =>{
         axios.post('/api/proprietor/login',{
             username: this.state.username,
@@ -77,9 +74,8 @@ export class Pro_Login_Conponent extends Component {
             }
             else
             {            
-              //this.props.get_P_User(response.data.username);
-              //this.props.get_P_Token(response.data.token);
               this.setState({ spinner: false })
+              localStorage.setItem("type",type.Proprietor)
               localStorage.setItem("p_username" ,response.data.username)
               this.setState({redirect : true})
           }
@@ -89,7 +85,7 @@ export class Pro_Login_Conponent extends Component {
         })
     }
 
-
+    //TenantLogin
     tenantLoginHandler = () =>{
         axios.post('/api/tenant/login',{
             username: this.state.username,
@@ -108,7 +104,8 @@ export class Pro_Login_Conponent extends Component {
               //this.props.get_P_User(response.data.username);
               //this.props.get_P_Token(response.data.token);
               this.setState({ spinner: false })
-              localStorage.setItem("p_username" ,response.data.username)
+              localStorage.setItem("type",type.Tenant);
+              localStorage.setItem("p_username" ,response.data.username);
               this.setState({redirect : true})
           }
         })

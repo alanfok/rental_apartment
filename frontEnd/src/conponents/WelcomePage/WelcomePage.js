@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import * as type from '../../type/type'
  
 import Slide from '../WelcomePageSlide/WelcomePageSlide'
-import PLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
+import PLOGIN from './Login_Conponent/Login_Conponent'
 import PSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
-import CLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
+import CLOGIN from './Login_Conponent/Login_Conponent'
 import CSINGUP from './Pro_Signup_Conponent/Pro_Signup_Conponent';
 
 import "./WelcomePage.css"
