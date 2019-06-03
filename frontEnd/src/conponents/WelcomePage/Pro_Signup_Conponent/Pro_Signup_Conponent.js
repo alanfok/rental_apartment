@@ -4,6 +4,7 @@ import {Form, FormGroup,Label,Input,Button} from 'reactstrap'
 
 import axios from 'axios';
 import './Pro_Signup_Conponent.css'
+import * as type from "../../../type/type"
 
 export default class Pro_Signup_Conponent extends Component {
     constructor(props){
@@ -37,16 +38,40 @@ export default class Pro_Signup_Conponent extends Component {
                 this.setState({req_re_password: "pro_signup_conponent_input_required"})    
             }
             else{
-                axios.post('api/proprietor/register_pro',{
-                    username: this.state.username,
-                    email: this.state.email,
-                    password: this.state.password
-                })
-                .then(response=>{this.setState({result: response.data})})
-                .catch((err)=>{
-                    console.log(err);
-                })
+                if(this.props.name === type.Proprietor)
+                {
+                    this.proprietior_register();
+                }
+                else
+                {
+                    this.tenant_register();
+                }
             }
+    }
+
+
+    proprietior_register = () =>{
+        axios.post('api/proprietor/register',{
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(response=>{this.setState({result: response.data})})
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    tenant_register = () =>{
+        axios.post('api/tenant/register',{
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(response=>{this.setState({result: response.data})})
+        .catch((err)=>{
+            console.log(err);
+        })
     }
 
     render() {   

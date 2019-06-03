@@ -5,6 +5,7 @@ const cors = require('cors')
 const path = require('path');
 
 var proprietor = require('./proprietor')
+var tenant = require('./tenant')
 
 
 const app = express();
@@ -27,6 +28,7 @@ var pool = mysql.createPool({
 
 
 app.use('/api/proprietor',proprietor);
+app.use('/api/tenant',tenant);
 
 app.get('/fd', (req,res)=>{
     res.send("hello");

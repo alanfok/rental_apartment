@@ -4,6 +4,8 @@ import { Spinner} from 'reactstrap'
 import axios from 'axios';
 import "./Pro_Login_Conponent.css";
 
+import * as type from "../../../type/type"
+
 export class Pro_Login_Conponent extends Component {
     
     constructor(props)
@@ -45,12 +47,51 @@ export class Pro_Login_Conponent extends Component {
         }
         else
         {
+            if(this.props.name === type.Proprietor)
+            {
             this.proprietorLoginHandler();
+            }
+            else
+            {
+                this.tenantLoginHandler();
+            }
         }
     }
 
+
+
+
+    
     proprietorLoginHandler = () =>{
         axios.post('/api/proprietor/login',{
+            username: this.state.username,
+            password: this.state.password
+        })
+        .then((response)=>{//return from back-end
+            var hasUser = response.data.hasUser;
+            console.log(hasUser)
+            if(!hasUser)
+            {
+                this.setState({ spinner: false })
+                this.setState({warningmessage: "we don't have this user"})
+            }
+            else
+            {            
+              //this.props.get_P_User(response.data.username);
+              //this.props.get_P_Token(response.data.token);
+              this.setState({ spinner: false })
+              localStorage.setItem("p_username" ,response.data.username)
+              this.setState({redirect : true})
+          }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+
+    tenantLoginHandler = () =>{
+        axios.post('/api/tenant/login',{
             username: this.state.username,
             password: this.state.password
         })

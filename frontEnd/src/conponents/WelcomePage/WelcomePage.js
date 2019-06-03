@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Button,Spinner} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import * as type from '../../type/type'
  
 import Slide from '../WelcomePageSlide/WelcomePageSlide'
 import PLOGIN from './Pro_Login_Conponent/Pro_Login_Conponent'
@@ -58,8 +59,7 @@ class WelcomePage extends Component {
         window.addEventListener('resize',this.reSizeHandler);
         
     }
-
-
+    
     componentWillUnmount() 
     {
         window.removeEventListener('resize', this.reSizeHandler);
@@ -88,11 +88,11 @@ class WelcomePage extends Component {
                             <p className="w_proprietor_close" onClick={this.PLoginCloseHandler}>+</p>
                             {(this.state.isLookforApartment)?                        
                             <div>{/* login in for look for appartment */}
-                                 {(this.state.toggle)?<CSINGUP name="Tenant"/>:<CLOGIN name="Tenant" childTroggle={this.toggleHandler}/>}
+                                 {(this.state.toggle)?<CSINGUP name={type.Tenant}/>:<CLOGIN name={type.Tenant} childTroggle={this.toggleHandler}/>}
                             </div>
                             :
                             <div>{/* login in for look for client */}
-                            {(this.state.toggle)?<PSINGUP name="Proprietor"/>:<PLOGIN name="Proprietor" childTroggle={this.toggleHandler}/>}
+                            {(this.state.toggle)?<PSINGUP name={type.Proprietor}/>:<PLOGIN name={type.Proprietor} childTroggle={this.toggleHandler}/>}
                             </div>
                             }
                         </div>

@@ -10,21 +10,9 @@ var pool = mysql.createPool({
     database:'rentalapp'
 });
 
-router.post('/registerform',(req,res)=>{
-  const {n_apt,s_street,size,price,pet,smoke,comment} = req.body;
-  var b_pet = 0;
-  var b_smoke = 0;
-  if(pet === true){
-    b_pet = 1;
-  }
-  if(smoke === true){
-    b_smoke = 1;
-  }
-  pool.query(`INSERT INTO rentalapp.rent (apt,street,size,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},${b_pet},${b_smoke},${price},"${comment}" );`)
-  .then(()=>{console.log("sccuess")})
-  .catch((err)=>{console.log(err)})
-})
 
+
+//function for register user
 router.post('/register',(req,res)=>{
   const{username,email,password} = req.body;
   var x = new Promise((resolve,reject)=>{
@@ -33,12 +21,10 @@ router.post('/register',(req,res)=>{
   x.then((val)=>res.json(val));
 })
 
-
-//function for register user
  async function add_user(name,email,password,){
-  var result = await pool.query(`SELECT username FROM rentalapp.pro_user WHERE username = '${name}';`);
+  var result = await pool.query(`SELECT username FROM rentalapp.ten_user WHERE username = '${name}';`);
   if(result == ""){
-    pool.query(`INSERT INTO rentalapp.pro_user (username,email,password) VALUE ("${name}","${email}","${password}");`)
+    pool.query(`INSERT INTO rentalapp.ten_user (username,email,password) VALUE ("${name}","${email}","${password}");`)
     return "success";
   }else{
      console.log("it has a user")
@@ -50,7 +36,7 @@ router.post('/register',(req,res)=>{
 router.post('/login',(req,res)=>{
   const {username,password} = req.body;
   var  user ={};
-  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
+  pool.query(`SELECT * FROM rentalapp.ten_user WHERE username='${username}' AND password='${password}';`)
   .then(
     (row)=>
           {
