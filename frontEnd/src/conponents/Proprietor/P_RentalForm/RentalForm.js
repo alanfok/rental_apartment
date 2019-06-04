@@ -13,6 +13,7 @@ export class RentalForm extends Component {
     constructor(props){
         super(props);
         this.state={
+            username: localStorage.getItem("p_username"),
             n_apt: "",
             s_street: "",
             size : 3,
@@ -50,6 +51,7 @@ export class RentalForm extends Component {
     sumbitHandler =()=>{
         axois.post('/api/proprietor/registerform',
         {
+            s_name: this.state.username,
             n_apt: this.state.n_apt,
             s_street: this.state.s_street,
             size: this.state.size,
@@ -69,9 +71,15 @@ export class RentalForm extends Component {
                 this.setState({warningMsg: "fail"})
             }
 
-    })
+        })
+        .then(()=>{
+            if(this.state.warningMsg === "success")
+            {
+                window.location.href = "/porpritor/dashboard"
+            }
+        })
         .catch((err)=>console.log(err))
-    }
+        }
 
     render() {
     
@@ -81,6 +89,7 @@ export class RentalForm extends Component {
 
                 <Form className="retalForm">
                     <FormGroup>
+                        {this.state.username}
                         <Label className="lable">Apartment number</Label>
                         <Input placeholder = "#ApportmentNumber" type="number" onChange={(event)=>{this.setState({n_apt: event.target.value})}} value={this.state.n_apt}></Input>
                         <Label className="lable">Street</Label>
