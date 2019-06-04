@@ -19,7 +19,8 @@ export class RentalForm extends Component {
             price: "",
             pet: false,
             smoke: false,
-            comment:""
+            comment:"",
+            warningMsg: ""
         }
     }
 
@@ -57,6 +58,18 @@ export class RentalForm extends Component {
             smoke: this.state.smoke,
             comment: this.state.comment
         })
+        .then((response)=>{
+
+            if(response.data.message === "success")
+            {
+                this.setState({warningMsg: "success"})
+            }
+            else
+            {
+                this.setState({warningMsg: "fail"})
+            }
+
+    })
         .catch((err)=>console.log(err))
     }
 
@@ -95,11 +108,11 @@ export class RentalForm extends Component {
                         <Label className="lable">Checkbox</Label>
                         <br/>
                         <span className="checkbox">
-                        <Input type="checkbox" checked={this.state.pet} onClick={this.petAllowHandler}></Input>pet allow
+                        <Input type="checkbox" checked={this.state.pet} onChange={this.petAllowHandler} ></Input>pet allow
                         </span>         
                         <br/>
                         <span className="checkbox">
-                        <Input type="checkbox" checked={this.state.smoke} onClick={this.smokeAllowHandler}></Input>smoke allow
+                        <Input type="checkbox" checked={this.state.smoke} onChange={this.smokeAllowHandler} ></Input>smoke allow
                         </span>           
                         <br></br>
                         <br></br>
@@ -107,6 +120,8 @@ export class RentalForm extends Component {
                         <Input type="textarea" onChange={(e)=>{this.setState({comment: e.target.value})}} value={ this.state.comment} rows="4"></Input>
                         <br/>
                         <Button onClick={this.sumbitHandler}  >Submit</Button>    
+                        <br/>
+                        {this.state.warningMsg}
                     </FormGroup>
                 </Form>
             </div>

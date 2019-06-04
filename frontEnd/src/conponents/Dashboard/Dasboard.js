@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-
+import * as types from '../../type/type'
 
 class P_Dasboard extends Component {
     constructor(props){
@@ -22,9 +22,6 @@ class P_Dasboard extends Component {
     }
 
 
-
- 
-
     render() {
         const type = localStorage.getItem("type")
         if(type ===null)
@@ -37,15 +34,31 @@ class P_Dasboard extends Component {
         }
        else
        {
-        return (
-            <div>
-                <h1>{this.state.type}Dasboard</h1>
-                {this.state.p_username}
-                <br/>
-                <button onClick={this.logout}>Logout</button>
-                <Link to="/porpritor/form"><button>Register Apartment</button></Link>
-            </div>
-        )
+           if(this.state.type === types.Proprietor)
+            {
+                return (
+                <div>
+                    <h1>{this.state.type}Dasboard</h1>
+                    {this.state.p_username}
+                    <br/>
+                    <button onClick={this.logout}>Logout</button>
+                    <Link to="/porpritor/form"><button>Register Apartment</button></Link>
+                </div>
+                )
+            }
+            else
+            {
+                return(
+                    <div>
+                    <h1>{this.state.type}Dasboard</h1>
+                    {this.state.p_username}
+                    <br/>
+                    <button onClick={this.logout}>Logout</button>
+                </div>
+                )
+            }
+        
+
     }
 
     }

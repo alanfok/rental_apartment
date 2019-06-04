@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from './conponents/WelcomePage/WelcomePage'
 import P_rentalForm from './conponents/Proprietor/P_RentalForm/RentalForm'
 
-import P_dashboard from './conponents/Proprietor/P_Dashboard/P_Dasboard'
+import dashboard from './conponents/Dashboard/Dasboard'
 
 
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class App extends Component {
       <Switch>
       <Route exact path="/" component={Welcome}/>
       <Route exact path="/porpritor/form" component={P_rentalForm}/>
-      <Route exact path="/porpritor/p_dashboard" component={P_dashboard}/>
+      <Route exact path="/porpritor/dashboard" component={dashboard}/>
       </Switch>
     </Router>
     </div>

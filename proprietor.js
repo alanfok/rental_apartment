@@ -21,7 +21,9 @@ router.post('/registerform',(req,res)=>{
     b_smoke = 1;
   }
   pool.query(`INSERT INTO rentalapp.rent (apt,street,size,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},${b_pet},${b_smoke},${price},"${comment}" );`)
-  .then(()=>{console.log("sccuess")})
+  .then(
+    res.json({message: "success"})
+    )
   .catch((err)=>{console.log(err)})
 })
 

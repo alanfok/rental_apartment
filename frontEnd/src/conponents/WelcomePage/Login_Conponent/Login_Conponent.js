@@ -118,7 +118,7 @@ export class Pro_Login_Conponent extends Component {
         return (
             <div className="pro_login_conponenet_bg">
                
-               {(this.state.redirect)?<Redirect to="/porpritor/p_dashboard"/>:null}
+               {(this.state.redirect)?<Redirect to="/porpritor/dashboard"/>:null}
                 <h3 >{this.props.name} Login</h3>
                 <input className="pro_login_conponenet_input" placeholder="Username" type="text" onChange={this.usernameHandler}></input>
                 <br/>
