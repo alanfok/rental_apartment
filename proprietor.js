@@ -32,7 +32,7 @@ router.post('/registerform',(req,res)=>{
   .catch((err)=>{console.log(err)})
 })
 
-
+//assign the apartment to owner
 assignToOwner =  async (owner, apt, street)=>{
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
@@ -92,9 +92,7 @@ router.post('/login',(req,res)=>{
             }
           }
   )
-  
-  //res.json()
-  
+ 
   });
   
   

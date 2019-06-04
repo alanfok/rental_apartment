@@ -82,59 +82,71 @@ export class RentalForm extends Component {
         }
 
     render() {
-    
-        return (
-            <div className="retalFormbg">
-                <h1>Apartment Register Form</h1>
+        const username = localStorage.getItem("p_username");
+        const type =localStorage.getItem("type")
+        if(username ==="" && type === "")
+        {
+            return(
+                <div>
+                    <h1>You Haven't log in</h1>
+                </div>
+            )
+        }
+        else
+        {
+                return (
+                <div className="retalFormbg">
+                    <h1>Apartment Register Form</h1>
 
-                <Form className="retalForm">
-                    <FormGroup>
-                        {this.state.username}
-                        <Label className="lable">Apartment number</Label>
-                        <Input placeholder = "#ApportmentNumber" type="number" onChange={(event)=>{this.setState({n_apt: event.target.value})}} value={this.state.n_apt}></Input>
-                        <Label className="lable">Street</Label>
-                        <Input placeholder = "street" type="text" onChange={(event)=>{this.setState({s_street: event.target.value})}} value={this.state.s_street}></Input>
-                        <Label className="lable">Size</Label>
-                        <Input type="select" onChange={this.sizeSelectHandle}>
-                        <option value="1">
-                            studio
-                        </option>
-                        <option value="3">
-                            3&frac12;
-                        </option>
-                        <option value="4">
-                            4&frac12;
-                        </option>
-                        <option  value="5">
-                            5&frac12;
-                        </option>
-                        <option  value="6">
-                           bigger
-                        </option>
-                        </Input>
-                        <Label className="lable">Rent</Label>
-                        <Input placeholder = "$" type="number" onChange={(event)=>{this.setState({price: event.target.value})}} value={this.state.price}></Input>
-                        <Label className="lable">Checkbox</Label>
-                        <br/>
-                        <span className="checkbox">
-                        <Input type="checkbox" checked={this.state.pet} onChange={this.petAllowHandler} ></Input>pet allow
-                        </span>         
-                        <br/>
-                        <span className="checkbox">
-                        <Input type="checkbox" checked={this.state.smoke} onChange={this.smokeAllowHandler} ></Input>smoke allow
-                        </span>           
-                        <br></br>
-                        <br></br>
-                        <Label>Comment</Label>
-                        <Input type="textarea" onChange={(e)=>{this.setState({comment: e.target.value})}} value={ this.state.comment} rows="4"></Input>
-                        <br/>
-                        <Button onClick={this.sumbitHandler}  >Submit</Button>    
-                        <br/>
-                        {this.state.warningMsg}
-                    </FormGroup>
-                </Form>
-            </div>
-        )
+                    <Form className="retalForm">
+                        <FormGroup>
+                            {this.state.username}
+                            <Label className="lable">Apartment number</Label>
+                            <Input placeholder = "#ApportmentNumber" type="number" onChange={(event)=>{this.setState({n_apt: event.target.value})}} value={this.state.n_apt}></Input>
+                            <Label className="lable">Street</Label>
+                            <Input placeholder = "street" type="text" onChange={(event)=>{this.setState({s_street: event.target.value})}} value={this.state.s_street}></Input>
+                            <Label className="lable">Size</Label>
+                            <Input type="select" onChange={this.sizeSelectHandle}>
+                            <option value="1">
+                                studio
+                            </option>
+                            <option value="3">
+                                3&frac12;
+                            </option>
+                            <option value="4">
+                                4&frac12;
+                            </option>
+                            <option  value="5">
+                                5&frac12;
+                            </option>
+                            <option  value="6">
+                            bigger
+                            </option>
+                            </Input>
+                            <Label className="lable">Rent</Label>
+                            <Input placeholder = "$" type="number" onChange={(event)=>{this.setState({price: event.target.value})}} value={this.state.price}></Input>
+                            <Label className="lable">Checkbox</Label>
+                            <br/>
+                            <span className="checkbox">
+                            <Input type="checkbox" checked={this.state.pet} onChange={this.petAllowHandler} ></Input>pet allow
+                            </span>         
+                            <br/>
+                            <span className="checkbox">
+                            <Input type="checkbox" checked={this.state.smoke} onChange={this.smokeAllowHandler} ></Input>smoke allow
+                            </span>           
+                            <br></br>
+                            <br></br>
+                            <Label>Comment</Label>
+                            <Input type="textarea" onChange={(e)=>{this.setState({comment: e.target.value})}} value={ this.state.comment} rows="4"></Input>
+                            <br/>
+                            <Button onClick={this.sumbitHandler}  >Submit</Button>    
+                            <br/>
+                            {this.state.warningMsg}
+                        </FormGroup>
+                    </Form>
+                </div>
+            )
+        }
     }
 }
 

@@ -14,6 +14,7 @@ class P_Dasboard extends Component {
 
     logout = () =>{
         localStorage.removeItem("p_username");
+        localStorage.removeItem("type")
         this.props.history.push('/');
     }
 
@@ -24,7 +25,8 @@ class P_Dasboard extends Component {
 
     render() {
         const type = localStorage.getItem("type")
-        if(type ===null)
+        const username = localStorage.getItem("p_username")
+        if(type ===null&&username===null)
         {
             return(
                 <div>
