@@ -14,7 +14,7 @@ router.post('/registerform',(req,res)=>{
   const {s_name,n_apt,s_street,size,price,pet,smoke,comment} = req.body;
   var b_pet = 0;
   var b_smoke = 0;
-  var ddd =""
+  
   if(pet === true){
     b_pet = 1;
   }
@@ -38,8 +38,6 @@ assignToOwner =  async (owner, apt, street)=>{
   var row = await getID;
   await pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
 }
-
-
 
 
 router.post('/register',(req,res)=>{
@@ -124,5 +122,22 @@ router.post('/login',(req,res)=>{
     }
   
   }
+
+router.post('/fetch',(req,res)=>{
+  const {owner}=req.body
+  pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent inner join rentalapp.ownto where rentalapp.rent.id = rentalapp.ownto.id And rentalapp.ownto.owner = "${owner}";`)
+  .then((row)=>{
+    res.json({apt : row})})
+})
+
+  
+router.post('/deleteApt',(reqmres)=>{
+  const {id}=req.body
+   pool.query()
+
+})
+
+
+
 
 module.exports = router;
