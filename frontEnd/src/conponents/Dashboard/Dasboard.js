@@ -12,8 +12,8 @@ class P_Dasboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            p_username : localStorage.getItem("p_username"),
-            type: localStorage.getItem("type"),
+            p_username : sessionStorage.getItem("p_username"),
+            type: sessionStorage.getItem("type"),
             apartment: []
         }
     }
@@ -21,7 +21,7 @@ class P_Dasboard extends Component {
     componentWillMount()
     {
         axios.post('/api/proprietor/fetch',{
-            owner: localStorage.getItem("p_username")
+            owner: sessionStorage.getItem("p_username")
         })
         .then((response)=>{
             this.setState({apartment: response.data.apt})
@@ -30,8 +30,8 @@ class P_Dasboard extends Component {
     }
 
     logout = () =>{
-        localStorage.removeItem("p_username");
-        localStorage.removeItem("type")
+        sessionStorage.removeItem("p_username");
+        sessionStorage.removeItem("type")
         this.props.history.push('/');
     }
 
@@ -65,8 +65,8 @@ class P_Dasboard extends Component {
 
     render() {
  
-        const type = localStorage.getItem("type")
-        const username = localStorage.getItem("p_username")
+        const type = sessionStorage.getItem("type")
+        const username = sessionStorage.getItem("p_username")
         if(type ===null&&username===null)
         {
             return(
