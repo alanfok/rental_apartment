@@ -11,9 +11,10 @@ var pool = mysql.createPool({
 });
 
 router.post('/registerform',(req,res)=>{
-  const {n_apt,s_street,size,price,pet,smoke,comment} = req.body;
+  const {s_name,n_apt,s_street,size,price,pet,smoke,comment} = req.body;
   var b_pet = 0;
   var b_smoke = 0;
+  
   if(pet === true){
     b_pet = 1;
   }
@@ -22,10 +23,22 @@ router.post('/registerform',(req,res)=>{
   }
   pool.query(`INSERT INTO rentalapp.rent (apt,street,size,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},${b_pet},${b_smoke},${price},"${comment}" );`)
   .then(
+     assignToOwner(s_name,n_apt,s_street)
+  )
+  .then(()=>{
     res.json({message: "success"})
+  }
     )
   .catch((err)=>{console.log(err)})
 })
+
+//assign the apartment to owner
+assignToOwner =  async (owner, apt, street)=>{
+  const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
+  var row = await getID;
+  await pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+}
+
 
 router.post('/register',(req,res)=>{
   const{username,email,password} = req.body;
@@ -77,9 +90,7 @@ router.post('/login',(req,res)=>{
             }
           }
   )
-  
-  //res.json()
-  
+ 
   });
   
   
@@ -111,5 +122,22 @@ router.post('/login',(req,res)=>{
     }
   
   }
+
+router.post('/fetch',(req,res)=>{
+  const {owner}=req.body
+  pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent inner join rentalapp.ownto where rentalapp.rent.id = rentalapp.ownto.id And rentalapp.ownto.owner = "${owner}";`)
+  .then((row)=>{
+    res.json({apt : row})})
+})
+
+  
+router.post('/deleteApt',(reqmres)=>{
+  const {id}=req.body
+   pool.query()
+
+})
+
+
+
 
 module.exports = router;

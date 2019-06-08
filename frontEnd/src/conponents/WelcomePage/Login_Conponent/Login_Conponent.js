@@ -75,8 +75,8 @@ export class Pro_Login_Conponent extends Component {
             else
             {            
               this.setState({ spinner: false })
-              localStorage.setItem("type",type.Proprietor)
-              localStorage.setItem("p_username" ,response.data.username)
+              sessionStorage.setItem("type",type.Proprietor)
+              sessionStorage.setItem("p_username" ,response.data.username)
               this.setState({redirect : true})
           }
         })

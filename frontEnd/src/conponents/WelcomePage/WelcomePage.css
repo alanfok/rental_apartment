@@ -50,6 +50,7 @@
     font-size: 5ex;
     transform: rotate(45deg);
     cursor: pointer;
+    user-select: none;
 }
 
 .w_proprietor_close:focus{
