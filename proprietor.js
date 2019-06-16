@@ -131,9 +131,15 @@ router.post('/fetch',(req,res)=>{
 })
 
   
-router.post('/deleteApt',(reqmres)=>{
+router.post('/deleteApt',(req,res)=>{
   const {id}=req.body
-   pool.query()
+   pool.query(`DELETE FROM rentalapp.rent WHERE id=${id}`)
+   .then(
+     pool.query(`DELETE FROM rentalapp.ownto WHERE id=${id}`)
+   )
+   .then(
+     res.json({message: "success"})
+   )
 
 })
 
