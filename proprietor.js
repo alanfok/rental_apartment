@@ -14,7 +14,7 @@ router.post('/registerform',(req,res)=>{
   const {s_name,n_apt,s_street,size,price,pet,smoke,comment} = req.body;
   var b_pet = 0;
   var b_smoke = 0;
-  
+
   if(pet === true){
     b_pet = 1;
   }
@@ -34,11 +34,9 @@ router.post('/registerform',(req,res)=>{
 
 //assign the apartment to owner
 assignToOwner =  async (owner, apt, street)=>{
-  console.log("ower" + owner);
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
-  console.log("ower "+owner);
-  await pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+  row.then(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`))
 }
 
 
