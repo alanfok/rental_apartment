@@ -22,9 +22,9 @@ router.post('/registerform',(req,res,next)=>{
     b_smoke = 1;
   }
   pool.query(`INSERT INTO rentalapp.rent (apt,street,size,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},${b_pet},${b_smoke},${price},"${comment}" );`)
-  .then(
-     assignToOwner(s_name,n_apt,s_street)
-  )
+  .then(()=>{
+       assignToOwner(s_name,n_apt,s_street);
+  })
   .then(()=>{
     res.json({message: "success"});
     next();
@@ -37,11 +37,11 @@ router.post('/registerform',(req,res,next)=>{
 assignToOwner =  async (owner, apt, street)=>{
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
- //const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
-  //var result = await into;
+  const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
+  var result = await into;
   
-  pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
-  //return result;
+  //pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+  return result;
 }
 
 
