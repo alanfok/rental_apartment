@@ -36,17 +36,13 @@ router.post('/registerform',(req,res)=>{
 assignToOwner =  async (owner, apt, street)=>{
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
-  const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
-  var result = await into;
-  //pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
-  return result;
+ //const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
+  //var result = await into;
+  
+  pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+  //return result;
 }
 
-assignToOwner2 = async(owner, id)=>{
-  const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${id});`)))
-  var x = await into;
-  return x;
-}
 
 
 router.post('/register',(req,res)=>{
