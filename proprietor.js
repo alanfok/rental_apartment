@@ -10,11 +10,11 @@ var pool = mysql.createPool({
     database:'rentalapp'
 });
 
-router.post('/registerform',(req,res)=>{
+router.post('/registerform',(req,res,next)=>{
   const {s_name,n_apt,s_street,size,price,pet,smoke,comment} = req.body;
   var b_pet = 0;
   var b_smoke = 0;
-  
+
   if(pet === true){
     b_pet = 1;
   }
@@ -26,7 +26,8 @@ router.post('/registerform',(req,res)=>{
      assignToOwner(s_name,n_apt,s_street)
   )
   .then(()=>{
-    res.json({message: "success"})
+    res.json({message: "success"});
+    next();
   }
     )
   .catch((err)=>{console.log(err)})
@@ -36,8 +37,13 @@ router.post('/registerform',(req,res)=>{
 assignToOwner =  async (owner, apt, street)=>{
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
-  await pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+ //const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
+  //var result = await into;
+  
+  pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
+  //return result;
 }
+
 
 
 router.post('/register',(req,res)=>{
@@ -131,9 +137,15 @@ router.post('/fetch',(req,res)=>{
 })
 
   
-router.post('/deleteApt',(reqmres)=>{
+router.post('/deleteApt',(req,res)=>{
   const {id}=req.body
-   pool.query()
+   pool.query(`DELETE FROM rentalapp.rent WHERE id=${id}`)
+   .then(
+     pool.query(`DELETE FROM rentalapp.ownto WHERE id=${id}`)
+   )
+   .then(
+     res.json({message: "success"})
+   )
 
 })
 

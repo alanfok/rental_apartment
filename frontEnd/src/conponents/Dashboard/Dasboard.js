@@ -5,6 +5,8 @@ import * as types from '../../type/type'
 import {Table} from 'reactstrap'
 
 
+import ProDashboard from './Pro_Dashboard/Pro_Dashboard'
+
 import axios from 'axios'
 
 
@@ -13,20 +15,8 @@ class P_Dasboard extends Component {
         super(props);
         this.state = {
             p_username : sessionStorage.getItem("p_username"),
-            type: sessionStorage.getItem("type"),
-            apartment: []
+            type: sessionStorage.getItem("type")
         }
-    }
-
-    componentWillMount()
-    {
-        axios.post('/api/proprietor/fetch',{
-            owner: sessionStorage.getItem("p_username")
-        })
-        .then((response)=>{
-            this.setState({apartment: response.data.apt})
-        })
-        .catch((err)=>console.log(err))
     }
 
     logout = () =>{
@@ -81,15 +71,7 @@ class P_Dasboard extends Component {
             {
                 return (
                 <div>
-                    <h1>{this.state.type}Dasboard</h1>
-                    {this.state.p_username}
-                    <div>
-                    {this.aptList()}
-                    </div>
-                    
-                    <br/>
-                    <button onClick={this.logout}>Logout</button>
-                    <Link to="/porpritor/form"><button>Register Apartment</button></Link>
+                   <ProDashboard/>
                 </div>
                 )
             }
