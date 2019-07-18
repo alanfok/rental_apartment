@@ -59,6 +59,7 @@ export default class Pro_Dashboard extends Component {
             <tr>
                 <td>{apartment.apt} </td>
                 <td>{apartment.street}</td>
+                <td>${apartment.rent}</td>
                 <td><button onClick={()=>this.DeleteApt(apartment.id)}>x</button></td>
             </tr>
         );
@@ -67,6 +68,7 @@ export default class Pro_Dashboard extends Component {
                 <tr>
                 <td>apt</td>
                 <td>street</td>
+                <td>rent</td>
                 </tr>
             {list}</Table>
         )
