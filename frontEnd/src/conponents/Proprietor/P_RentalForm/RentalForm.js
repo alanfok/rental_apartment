@@ -107,7 +107,8 @@ export class RentalForm extends Component {
                 return (
                 <div className="retalFormbg">
                     <h1>Apartment Register Form</h1>
-
+                    <p>{username}</p>
+                    <p>{type}</p>
                     <Form className="retalForm">
                         <FormGroup>
                             <Label className="lable">Apartment number</Label>
