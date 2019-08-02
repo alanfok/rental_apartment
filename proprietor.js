@@ -36,7 +36,10 @@ router.post('/registerform',(req,res,next)=>{
     )
   .catch((err)=>{
     res.json({message: "failed"});
-    console.log(err)}
+    next();
+    console.log(err)
+  }
+    
   )
 })
 

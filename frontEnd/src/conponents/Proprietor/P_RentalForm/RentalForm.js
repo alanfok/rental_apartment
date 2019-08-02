@@ -90,10 +90,11 @@ export class RentalForm extends Component {
             .catch((err)=>console.log(err))
             }
     }
+    
     render() {
         const username = localStorage.getItem("p_username");
         const type =localStorage.getItem("type")
-        if(username ==="" && type === "")
+        if(username ===null && type === null)
         {
             return(
                 <div>
