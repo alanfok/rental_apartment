@@ -37,6 +37,11 @@ router.post('/registerform',(req,res,next)=>{
 assignToOwner =  async (owner, apt, street)=>{
   const getID = new Promise ((resolve, reject)=>resolve(pool.query(`SELECT id FROM rentalapp.rent WHERE apt=${apt} AND street = "${street}";`)))
   var row = await getID;
+ 
+  while(row==null)
+  {
+  row = await getID;
+  }
   const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
   var result = await into;
   
