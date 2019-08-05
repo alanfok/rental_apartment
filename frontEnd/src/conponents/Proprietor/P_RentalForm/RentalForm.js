@@ -13,7 +13,7 @@ export class RentalForm extends Component {
     constructor(props){
         super(props);
         this.state={
-            username: localStorage.getItem("p_username"),
+            username: sessionStorage.getItem("p_username"),
             n_apt: null,
             s_street: "",
             size : 3,
@@ -90,10 +90,11 @@ export class RentalForm extends Component {
             .catch((err)=>console.log(err))
             }
     }
+    
     render() {
-        const username = localStorage.getItem("p_username");
-        const type =localStorage.getItem("type")
-        if(username ==="" && type === "")
+        const username = sessionStorage.getItem("p_username");
+        const type =sessionStorage.getItem("type")
+        if(username ===null && type === null)
         {
             return(
                 <div>
@@ -106,7 +107,8 @@ export class RentalForm extends Component {
                 return (
                 <div className="retalFormbg">
                     <h1>Apartment Register Form</h1>
-
+                    <p>{username}</p>
+                    <p>{type}</p>
                     <Form className="retalForm">
                         <FormGroup>
                             <Label className="lable">Apartment number</Label>
