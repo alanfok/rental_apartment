@@ -66,6 +66,7 @@ export class RentalForm extends Component {
                 n_apt: this.state.n_apt,
                 s_street: this.state.s_street,
                 size: this.state.size,
+                city: this.state.city,
                 price: this.state.price,
                 pet: this.state.pet,
                 smoke: this.state.smoke,

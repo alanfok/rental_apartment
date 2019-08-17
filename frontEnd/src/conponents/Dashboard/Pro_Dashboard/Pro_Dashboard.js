@@ -59,15 +59,18 @@ export default class Pro_Dashboard extends Component {
             <tr>
                 <td>{apartment.apt} </td>
                 <td>{apartment.street}</td>
+                <td>{apartment.city}</td>
                 <td>${apartment.rent}</td>
                 <td><button onClick={()=>this.DeleteApt(apartment.id)}>x</button></td>
             </tr>
         );
+        //return table
         return(
             <Table dark>
                 <tr>
-                <td>apt</td>
+                <td>apartment</td>
                 <td>street</td>
+                <td>city</td>
                 <td>rent</td>
                 </tr>
             {list}</Table>
@@ -79,7 +82,7 @@ export default class Pro_Dashboard extends Component {
             <div>
                 {this.state.logout?<Redirect to="/"/>:null}
                  <h1>{this.state.type}Dasboard</h1>
-                    {this.state.p_username}
+
                     <div>
                     {this.aptList()}
                     </div>

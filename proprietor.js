@@ -11,7 +11,8 @@ var pool = mysql.createPool({
 });
 
 router.post('/registerform',(req,res,next)=>{
-  const {s_name,n_apt,s_street,size,price,pet,smoke,comment} = req.body;
+  const {s_name,n_apt,s_street,size,city,price,pet,smoke,comment} = req.body;
+  console.log(city);
   var b_pet = 0;
   var b_smoke = 0;
 
@@ -21,7 +22,7 @@ router.post('/registerform',(req,res,next)=>{
   if(smoke === true){
     b_smoke = 1;
   }
-  pool.query(`INSERT INTO rentalapp.rent (apt,street,size,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},${b_pet},${b_smoke},${price},"${comment}" );`)
+  pool.query(`INSERT INTO rentalapp.rent (apt,street,size,city,pet,smoke,rent,comment) VALUE (${n_apt},"${s_street}",${size},"${city}",${b_pet},${b_smoke},${price},"${comment}" );`)
   .then(()=>{
        var result = assignToOwner(s_name,n_apt,s_street);
        if(!result)
