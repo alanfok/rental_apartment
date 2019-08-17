@@ -18,6 +18,7 @@ export class RentalForm extends Component {
             s_street: "",
             size : 3,
             price: "",
+            city: "Montreal",
             pet: false,
             smoke: false,
             comment:"",
@@ -47,6 +48,7 @@ export class RentalForm extends Component {
         else
         {this.setState({size : 6})}
     }
+
 
     sumbitHandler =()=>{
         if(this.state.s_street === "")
@@ -133,6 +135,15 @@ export class RentalForm extends Component {
                             bigger
                             </option>
                             </Input>
+                            <Label className="lable">City</Label>
+                            <Input type="select" name="select" id="exampleSelect" onChange={(event)=>{this.setState({city: event.target.value})}}>
+                                <option value = "Montreal"  >Montreal</option>
+                                <option value = "Winnipeg"  >Winnipeg</option>
+                                <option value = "Toronto"   >Toronto</option>
+                                <option value = "Vancouver" >Vancouver</option>
+                                <option value = "Halifax"   >Halifax</option>
+                            </Input>
+                            
                             <Label className="lable">Rent</Label>
                             <Input placeholder = "$" type="number" onChange={(event)=>{this.setState({price: event.target.value})}} value={this.state.price}></Input>
                             <Label className="lable">Checkbox</Label>
