@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router();
 const mysql = require('promise-mysql');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 var pool = mysql.createPool({
     host: 'den1.mysql4.gear.host',
@@ -85,8 +87,9 @@ router.post('/register',(req,res)=>{
 //function for register user
  async function add_user(name,email,password,){
   var result = await pool.query(`SELECT username FROM rentalapp.pro_user WHERE username = '${name}';`);
+  var hash = bcrypt.hashSync(password, saltRounds);
   if(result == ""){
-    pool.query(`INSERT INTO rentalapp.pro_user (username,email,password) VALUE ("${name}","${email}","${password}");`)
+    pool.query(`INSERT INTO rentalapp.pro_user (username,email,password) VALUE ("${name}","${email}","${hash}");`)
     return "success";
   }else{
      console.log("it has a user")
@@ -98,7 +101,7 @@ router.post('/register',(req,res)=>{
 router.post('/login',(req,res)=>{
   const {username,password} = req.body;
   var  user ={};
-  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
+  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}';`)
   .then(
     (row)=>
           {
@@ -108,18 +111,27 @@ router.post('/login',(req,res)=>{
             }
             else
             {
+              
               user = JSON.parse(JSON.stringify(row[0]));
               var username = row[0].username;
-              jwt.sign({user},"secretkey",
-              (err,token)=>
+              var hash = row[0].password;
+              var match = bcrypt.compareSync(password, hash); 
+              if(match)
               {
-                res.json({
-                  username : username,
-                  hasUser: true,
-                  token
+                jwt.sign({user},"secretkey",
+                (err,token)=>
+                {
+                  res.json({
+                    username : username,
+                    hasUser: true,
+                    token
+                  })
                 })
               }
-              )
+              else
+              {
+                res.json({hasUser: false})
+              }
             }
           }
   )

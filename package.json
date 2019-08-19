@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.0",
@@ -14,6 +15,6 @@
   },
   "scripts": {
     "start": "node app.js",
-   "heroku-postbuild": "cd frontEnd && yarn && yarn run build"
+    "heroku-postbuild": "cd frontEnd && yarn && yarn run build"
   }
 }
