@@ -2,9 +2,6 @@ var express = require('express')
 var router = express.Router();
 const mysql = require('promise-mysql');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
 
 var pool = mysql.createPool({
     host: 'den1.mysql4.gear.host',
@@ -87,11 +84,9 @@ router.post('/register',(req,res)=>{
 
 //function for register user
  async function add_user(name,email,password,){
-  var salt = bcrypt.genSaltSync(saltRounds);
-  var hash = bcrypt.hashSync(password, salt);
   var result = await pool.query(`SELECT username FROM rentalapp.pro_user WHERE username = '${name}';`);
   if(result == ""){
-    pool.query(`INSERT INTO rentalapp.pro_user (username,email,password) VALUE ("${name}","${email}","${hash}");`)
+    pool.query(`INSERT INTO rentalapp.pro_user (username,email,password) VALUE ("${name}","${email}","${password}");`)
     return "success";
   }else{
      console.log("it has a user")
@@ -99,13 +94,11 @@ router.post('/register',(req,res)=>{
   }
 }
 
-
-
 //login
 router.post('/login',(req,res)=>{
   const {username,password} = req.body;
   var  user ={};
-  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}';`)
+  pool.query(`SELECT * FROM rentalapp.pro_user WHERE username='${username}' AND password='${password}';`)
   .then(
     (row)=>
           {
@@ -117,11 +110,6 @@ router.post('/login',(req,res)=>{
             {
               user = JSON.parse(JSON.stringify(row[0]));
               var username = row[0].username;
-              var hash = row[0].password;
-              console.log(hash);
-              var match = bcrypt.compareSync(password,hash);
-              console.log(match);
-              if(match){
               jwt.sign({user},"secretkey",
               (err,token)=>
               {
@@ -132,13 +120,6 @@ router.post('/login',(req,res)=>{
                 })
               }
               )
-              }
-              else
-              {
-                {
-                  res.json({hasUser: false})
-                }
-              }
             }
           }
   )

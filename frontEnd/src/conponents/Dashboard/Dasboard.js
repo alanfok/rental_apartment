@@ -6,8 +6,6 @@ import {Table} from 'reactstrap'
 
 
 import ProDashboard from './Pro_Dashboard/Pro_Dashboard'
-import TenDashboard from './Ten_Dashboard/Ten_Dashboard'
-
 
 import axios from 'axios'
 
@@ -57,8 +55,7 @@ class P_Dasboard extends Component {
 
     render() {
  
-        const type = sessionStorage.getItem("type");
-        console.log(type);
+        const type = sessionStorage.getItem("type")
         const username = sessionStorage.getItem("p_username")
         if(type ===null&&username===null)
         {
@@ -77,15 +74,6 @@ class P_Dasboard extends Component {
                    <ProDashboard/>
                 </div>
                 )
-            }
-            else if(this.state.type === types.Tenant)
-            {
-                return(
-                    <div>
-                        <TenDashboard/>
-                    </div>
-                )
-
             }
             else
             {

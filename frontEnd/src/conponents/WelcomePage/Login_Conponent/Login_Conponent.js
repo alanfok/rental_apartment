@@ -104,8 +104,8 @@ export class Pro_Login_Conponent extends Component {
               //this.props.get_P_User(response.data.username);
               //this.props.get_P_Token(response.data.token);
               this.setState({ spinner: false })
-              sessionStorage.setItem("type",type.Tenant);
-              sessionStorage.setItem("p_username" ,response.data.username);
+              localStorage.setItem("type",type.Tenant);
+              localStorage.setItem("p_username" ,response.data.username);
               this.setState({redirect : true})
           }
         })
