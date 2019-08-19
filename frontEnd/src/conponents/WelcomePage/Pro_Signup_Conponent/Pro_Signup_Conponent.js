@@ -99,7 +99,7 @@ export default class Pro_Signup_Conponent extends Component {
                         <input className={this.state.req_re_password} placeholder = "re-password" type="password" onChange={(e)=>{this.setState({re_password: e.target.value})}} value={this.state.re_password}></input>    
                         <br/>              
                         <br/>     
-                        <button onClick={this.registerHandler}  >Register</button>    
+                        <button onClick={this.registerHandler}>Register</button>    
                         <br/>
                         <p>{this.state.result}</p>
                     </FormGroup>
