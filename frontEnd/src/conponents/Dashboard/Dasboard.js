@@ -5,7 +5,8 @@ import * as types from '../../type/type'
 import {Table} from 'reactstrap'
 
 
-import ProDashboard from './Pro_Dashboard/Pro_Dashboard'
+import ProDashboard from './Pro_Dashboard/Pro_Dashboard';
+import TenDashboard from './Ten_Dashboard/Ten_Dashboard';
 
 import axios from 'axios'
 
@@ -79,11 +80,8 @@ class P_Dasboard extends Component {
             {
                 return(
                     <div>
-                    <h1>{this.state.type}Dasboard</h1>
-                    {this.state.p_username}
-                    <br/>
-                    <button onClick={this.logout}>Logout</button>
-                </div>
+                    <TenDashboard/>
+                    </div>
                 )
             }
         

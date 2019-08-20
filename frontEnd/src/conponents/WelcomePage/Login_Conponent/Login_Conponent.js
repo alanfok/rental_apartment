@@ -40,11 +40,6 @@ export class Pro_Login_Conponent extends Component {
             this.setState({ spinner: false });
             this.setState({warningmessage:"username can't be empty"})
         }
-        else if(this.state.password ==="")
-        {
-            this.setState({ spinner: false });
-            this.setState({warningmessage:"password can't be empty"})
-        }
         else
         {
             if(this.props.name === type.Proprietor)
@@ -104,8 +99,8 @@ export class Pro_Login_Conponent extends Component {
               //this.props.get_P_User(response.data.username);
               //this.props.get_P_Token(response.data.token);
               this.setState({ spinner: false })
-              localStorage.setItem("type",type.Tenant);
-              localStorage.setItem("p_username" ,response.data.username);
+              sessionStorage.setItem("type",type.Tenant);
+              sessionStorage.setItem("p_username" ,response.data.username);
               this.setState({redirect : true})
           }
         })
