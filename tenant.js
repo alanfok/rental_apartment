@@ -96,4 +96,18 @@ router.post('/login',(req,res)=>{
   
   }
 
+
+
+
+  router.post('/search', (req,res,next)=>{
+        const {city} = req.body;
+        pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent Where city = "${city}"`)
+        .then((row)=>{res.json({apartment : row});
+        console.log(row);
+        });
+  })
+
+
+
+
 module.exports = router;

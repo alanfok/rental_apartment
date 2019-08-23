@@ -5,10 +5,10 @@ import {Table,Input,Button} from 'reactstrap'
 import {Redirect} from 'react-router-dom';
 
 
-import axios from 'axios'
+import axios from 'axios';
 
 import "./Ten_Dashboard.css";
-import { Buffer } from 'buffer';
+
 
 
 
@@ -20,6 +20,8 @@ export default class Ten_Dashboard extends Component {
             p_username : sessionStorage.getItem("p_username"),
             type: sessionStorage.getItem("type"),
             apartment: [],
+            showApartment: false,
+            city: "Montreal",
             logout: false
         }
     }
@@ -38,8 +40,37 @@ export default class Ten_Dashboard extends Component {
        // this.props.history.push('/');
     }
 
+    aptList=()=>{
+        const list = this.state.apartment.map((apartment)=>
+            <tr>
+                <td>{apartment.apt} </td>
+                <td>{apartment.street}</td>
+                <td>{apartment.city}</td>
+                <td>${apartment.rent}</td>
+            </tr>
+        );
+        //return table
+        return(
+            <Table dark>
+                <tr>
+                <td>apartment</td>
+                <td>street</td>
+                <td>city</td>
+                <td>rent</td>
+                </tr>
+            {list}</Table>
+        )
+    }
 
-
+    search_handler = () => {
+     axios.post('http://localhost:5000/api/tenant/search',{city: this.state.city})
+     .then((response)=>{this.setState({apartment : response.data.apartment});
+        this.setState({showApartment: true});
+    })
+     .catch((err)=>{
+         console.log(err);
+     })
+    }
     render() {
         return (
             <div>
@@ -49,7 +80,7 @@ export default class Ten_Dashboard extends Component {
                     <table className="ten_table">
                         <tr>
                             <td>
-                                <Input type="select">                              
+                                <Input type="select" onChange={(e)=>{this.setState({city : e.target.value})}}>                              
                                 <option value = "Montreal"  >Montreal</option>
                                 <option value = "Winnipeg"  >Winnipeg</option>
                                 <option value = "Toronto"   >Toronto</option>
@@ -57,10 +88,12 @@ export default class Ten_Dashboard extends Component {
                                 <option value = "Halifax"   >Halifax</option></Input>
                             </td>
                             <td>
-                                <Button>Search</Button>
+                                <Button onClick={this.search_handler}>Search</Button>
                             </td>
                         </tr>
                     </table>
+                    <br/>
+                    {(!this.state.showApartmen)?null:this.aptList()}
                     </div>           
                     <br/>
                     <button onClick={this.logout}>Logout</button>
