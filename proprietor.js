@@ -14,7 +14,6 @@ var pool = mysql.createPool({
 
 router.post('/registerform',(req,res,next)=>{
   const {s_name,n_apt,s_street,size,city,price,pet,smoke,comment} = req.body;
-  console.log(city);
   var b_pet = 0;
   var b_smoke = 0;
 
@@ -59,7 +58,10 @@ assignToOwner =  async (owner, apt, street)=>{
   }
 
   const into = new Promise((resolve,reject)=>resolve(pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)))
+  const isOccupied = new Promise((resolve,reject)=>{resolve(pool.query(`INSERT INTO rentalapp.to_rent (id,isOcuppied,telant_id) VALUE (${row[0].id},0,0);`))})
   var result = await into;
+  var anotherResult = await isOccupied;
+  console.log(anotherResult);
   
   //pool.query(`INSERT INTO rentalapp.ownto (owner,id) VALUE ("${owner}",${row[0].id});`)
  
@@ -181,6 +183,9 @@ router.post('/deleteApt',(req,res,next)=>{
    pool.query(`DELETE FROM rentalapp.rent WHERE id=${id}`)
    .then(
      pool.query(`DELETE FROM rentalapp.ownto WHERE id=${id}`)
+   )
+   .then(
+    pool.query(`DELETE FROM rentalapp.to_rent WHERE id=${id}`)
    )
    .then(
      res.json({message: "success"})
