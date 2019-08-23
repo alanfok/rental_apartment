@@ -93,7 +93,7 @@ export default class Ten_Dashboard extends Component {
                         </tr>
                     </table>
                     <br/>
-                    {(!this.state.showApartmen)?null:this.aptList()}
+                    {(!this.state.showApartment)?null:this.aptList()}
                     </div>           
                     <br/>
                     <button onClick={this.logout}>Logout</button>
