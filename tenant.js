@@ -101,7 +101,9 @@ router.post('/login',(req,res)=>{
 
   router.post('/search', (req,res,next)=>{
         const {city} = req.body;
-        pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent Where city = "${city}"`)
+        //SELECT  rentalapp.rent.*,rentalapp.to_rent.isOcuppied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = 'Winnipeg' AND rentalapp.rent.id = rentalapp.to_rent.id;
+        //pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent Where city = "${city}"`)
+        pool.query(`SELECT  rentalapp.rent.*,rentalapp.to_rent.isOcuppied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = '${city}' AND rentalapp.rent.id = rentalapp.to_rent.id`)
         .then((row)=>{res.json({apartment : row});
         console.log(row);
         });
