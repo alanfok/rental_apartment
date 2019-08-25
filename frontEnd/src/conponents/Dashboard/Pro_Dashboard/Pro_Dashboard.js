@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-import {Table} from 'reactstrap'
+import {Table ,Button} from 'reactstrap'
 import {Redirect} from 'react-router-dom';
 
 
@@ -54,6 +54,26 @@ export default class Pro_Dashboard extends Component {
          )
     }
 
+    aptListButton = (isOccupied) =>{
+        if(isOccupied === 2)
+        {
+            return(
+                <Button color="secondary">Occupied</Button>
+            )
+        }
+        else if(isOccupied === 1)
+        {
+            return(
+                <Button color="warning">Waiting</Button>
+            )
+        }
+        else
+        {
+            return(
+                <Button color="success">Empty</Button>
+            )
+        }
+    }
     aptList=()=>{
         const list = this.state.apartment.map((apartment)=>
             <tr>
@@ -61,6 +81,8 @@ export default class Pro_Dashboard extends Component {
                 <td>{apartment.street}</td>
                 <td>{apartment.city}</td>
                 <td>${apartment.rent}</td>
+                <td>{this.aptListButton(apartment.isOccupied)}</td>
+                <td>{apartment.telant_id}</td>
                 <td><button onClick={()=>this.DeleteApt(apartment.id)}>x</button></td>
             </tr>
         );
@@ -72,6 +94,8 @@ export default class Pro_Dashboard extends Component {
                 <td>street</td>
                 <td>city</td>
                 <td>rent</td>
+                <td>isOcuppied</td>
+                <td>telant_id</td>
                 </tr>
             {list}</Table>
         )

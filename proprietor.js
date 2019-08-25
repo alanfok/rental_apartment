@@ -172,7 +172,7 @@ router.post('/login',(req,res)=>{
 
 router.post('/fetch',(req,res)=>{
   const {owner}=req.body
-  pool.query(`SELECT rentalapp.rent.* ,rentalapp.to_rent.isOcuppied ,rentalapp.to_rent.telant_id FROM rentalapp.rent inner join rentalapp.ownto on rentalapp.rent.id = rentalapp.ownto.id And rentalapp.ownto.owner = "${owner}" inner join rentalapp.to_rent on rentalapp.rent.id = rentalapp.to_rent.id;`)
+  pool.query(`SELECT rentalapp.rent.* ,rentalapp.to_rent.isOccupied ,rentalapp.to_rent.telant_id FROM rentalapp.rent inner join rentalapp.ownto on rentalapp.rent.id = rentalapp.ownto.id And rentalapp.ownto.owner = "${owner}" inner join rentalapp.to_rent on rentalapp.rent.id = rentalapp.to_rent.id;`)
   .then((row)=>{
     res.json({apt : row})})
 })
