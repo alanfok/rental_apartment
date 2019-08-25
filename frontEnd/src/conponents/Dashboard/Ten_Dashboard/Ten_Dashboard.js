@@ -40,6 +40,24 @@ export default class Ten_Dashboard extends Component {
        // this.props.history.push('/');
     }
 
+    rentHandler =()=>{
+        alert("i rent it")
+    }
+
+    aptListButton = (isOccupied) =>{
+        if(isOccupied===0)
+        {
+            return(
+                <Button color="success" onClick={this.rentHandler}>Available</Button>
+            )
+        }
+        else
+        {
+            return(
+                <Button color="secondary">Occupied</Button>
+            )
+        }
+    }
     aptList=()=>{
         const list = this.state.apartment.map((apartment)=>
             <tr>
@@ -47,6 +65,7 @@ export default class Ten_Dashboard extends Component {
                 <td>{apartment.street}</td>
                 <td>{apartment.city}</td>
                 <td>${apartment.rent}</td>
+                <td>{this.aptListButton(apartment.isOccupied)}</td>
             </tr>
         );
         //return table
@@ -57,6 +76,7 @@ export default class Ten_Dashboard extends Component {
                 <td>street</td>
                 <td>city</td>
                 <td>rent</td>
+                <td>status</td>
                 </tr>
             {list}</Table>
         )
