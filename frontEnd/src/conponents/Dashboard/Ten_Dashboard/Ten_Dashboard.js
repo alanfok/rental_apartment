@@ -63,8 +63,10 @@ export default class Ten_Dashboard extends Component {
     }
 
     search_handler = () => {
-     axios.post('http://localhost:5000/api/tenant/search',{city: this.state.city})
+        console.log("click");
+     axios.post('/api/tenant/search',{city: this.state.city})
      .then((response)=>{this.setState({apartment : response.data.apartment});
+        console.log(response);
         this.setState({showApartment: true});
     })
      .catch((err)=>{
