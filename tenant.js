@@ -96,19 +96,40 @@ router.post('/login',(req,res)=>{
   
   }
 
-
-
-
   router.post('/search', (req,res,next)=>{
         const {city} = req.body;
         //SELECT  rentalapp.rent.*,rentalapp.to_rent.isOcuppied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = 'Winnipeg' AND rentalapp.rent.id = rentalapp.to_rent.id;
         //pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent Where city = "${city}"`)
-        pool.query(`SELECT  rentalapp.rent.*,rentalapp.to_rent.isOccupied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = '${city}' AND rentalapp.rent.id = rentalapp.to_rent.id`)
+        pool.query(`SELECT rentalapp.rent.*,rentalapp.to_rent.isOccupied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = '${city}' AND rentalapp.rent.id = rentalapp.to_rent.id`)
         .then((row)=>{res.json({apartment : row});
         console.log(row);
-        });
+        next();
+        })
   })
 
+  router.post('/applyRent',(req,res,next)=>{
+    const {id, tenant} = req.body;
+    applyTheApp(id,tenant);
+    next();
+  })
+
+ applyTheApp = async (id, tenant) =>{
+  console.log(id);
+  var result = "";
+  var getID = new Promise((resolve,reject)=>{resolve(pool.query(`SELECT rentalapp.ten_user.id FROM rentalapp.ten_user WHERE rentalapp.ten_user.username = '${tenant}'`))}) 
+  while(result === "")
+  {
+    result = await getID;
+  }
+  var Add = new Promise((resolve,reject)=>{resolve(pool.query(`UPDATE rentalapp.to_rent SET isOccupied = 1, telant_id=${result[0].id} WHERE id = ${id};`))}) 
+  var result2 = "";
+  while(result2 === "")
+  {
+    result2 = await Add;
+  }
+  return result2;
+}
+  //UPDATE `rentalapp`.`to_rent` SET `isOccupied`='1' WHERE `id`='144';
 
 
 
