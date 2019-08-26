@@ -12,7 +12,9 @@ import "./Ten_Dashboard.css";
 
 
 
+
 export default class Ten_Dashboard extends Component {
+ 
 
     constructor(props){
         super(props);
@@ -24,8 +26,9 @@ export default class Ten_Dashboard extends Component {
             city: "Montreal",
             logout: false
         }
+         //this.rentHandler = this.rentHandler.bind(this);
     }
-
+    
 
     componentWillMount()
     {
@@ -40,15 +43,26 @@ export default class Ten_Dashboard extends Component {
        // this.props.history.push('/');
     }
 
-    rentHandler =()=>{
-        alert("i rent it")
-    }
+    rentHandler =(id)=>{
+        //alert("i rent it "+id);
+        axios.post('/api/tenant/applyRent',{
+            id: id,
+            tenant : this.state.p_username
+        })
 
-    aptListButton = (isOccupied) =>{
+    }
+    
+    aptListButton = (isOccupied,id) =>{
         if(isOccupied===0)
         {
             return(
-                <Button color="success" onClick={this.rentHandler}>Available</Button>
+                <Button color="success" onClick={()=>this.rentHandler(id)}>Available</Button>
+            )
+        }
+        if(isOccupied===1)
+        {
+            return(
+                <Button color="warning">Pending</Button>
             )
         }
         else
@@ -65,7 +79,7 @@ export default class Ten_Dashboard extends Component {
                 <td>{apartment.street}</td>
                 <td>{apartment.city}</td>
                 <td>${apartment.rent}</td>
-                <td>{this.aptListButton(apartment.isOccupied)}</td>
+                <td>{this.aptListButton(apartment.isOccupied,apartment.id)}</td>
             </tr>
         );
         //return table
@@ -83,7 +97,6 @@ export default class Ten_Dashboard extends Component {
     }
 
     search_handler = () => {
-        console.log("click");
      axios.post('/api/tenant/search',{city: this.state.city})
      .then((response)=>{this.setState({apartment : response.data.apartment});
         console.log(response);
