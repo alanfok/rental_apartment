@@ -194,6 +194,18 @@ router.post('/deleteApt',(req,res,next)=>{
 })
 
 
+router.post('/accept',(req,res,next)=>{
+  const {id}=req.body
+  pool.query(`UPDATE rentalapp.to_rent SET isOccupied = 2 WHERE id = ${id};`).
+  then(()=>res.json({message: "success"}))
+  .catch(()=>res.json({message: "fail"}))
+})
 
+router.post('/reject',(req,res,next)=>{
+  const {id}=req.body
+  pool.query(`UPDATE rentalapp.to_rent SET isOccupied = 0,telant_id = 0 WHERE id = ${id};`).
+  then(()=>res.json({message: "success"}))
+  .catch(()=>res.json({message: "fail"}))
+})
 
 module.exports = router;

@@ -102,15 +102,19 @@ router.post('/login',(req,res)=>{
         //pool.query(`SELECT rentalapp.rent.* FROM rentalapp.rent Where city = "${city}"`)
         pool.query(`SELECT rentalapp.rent.*,rentalapp.to_rent.isOccupied, rentalapp.to_rent.telant_id  FROM rentalapp.rent inner JOIN rentalapp.to_rent where rentalapp.rent.city = '${city}' AND rentalapp.rent.id = rentalapp.to_rent.id`)
         .then((row)=>{res.json({apartment : row});
-        console.log(row);
         next();
         })
   })
 
   router.post('/applyRent',(req,res,next)=>{
     const {id, tenant} = req.body;
-    applyTheApp(id,tenant);
+    applyTheApp(id,tenant).then(
+      res.json({message:  "success"}))
+      .catch((err)=>{
+        res.json({message:  "fail"})
+      })
     next();
+
   })
 
  applyTheApp = async (id, tenant) =>{
@@ -127,7 +131,6 @@ router.post('/login',(req,res)=>{
   {
     result2 = await Add;
   }
-  return result2;
 }
   //UPDATE `rentalapp`.`to_rent` SET `isOccupied`='1' WHERE `id`='144';
 
