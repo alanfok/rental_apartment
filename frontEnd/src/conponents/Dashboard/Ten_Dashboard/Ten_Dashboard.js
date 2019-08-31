@@ -49,7 +49,18 @@ export default class Ten_Dashboard extends Component {
             id: id,
             tenant : this.state.p_username
         })
-
+        .then((response)=>{
+            if(response.data.message === "success")
+            {
+                alert("success to rent");
+                window.location.reload();
+            }
+            else
+            {
+                alert("fail to rent");
+                window.location.reload();
+            }
+        });
     }
     
     aptListButton = (isOccupied,id) =>{
@@ -99,7 +110,6 @@ export default class Ten_Dashboard extends Component {
     search_handler = () => {
      axios.post('/api/tenant/search',{city: this.state.city})
      .then((response)=>{this.setState({apartment : response.data.apartment});
-        console.log(response);
         this.setState({showApartment: true});
     })
      .catch((err)=>{

@@ -54,7 +54,49 @@ export default class Pro_Dashboard extends Component {
          )
     }
 
-    aptListButton = (isOccupied) =>{
+    acceptRental = (id) =>{
+        var r = window.confirm("do you accept the tenant");
+        if(r)
+        {
+        axios.post("/api/proprietor/accept",{
+            id: id
+        })
+        .then((response)=>{
+            var result = response.data.message;
+            if(result === "success")
+            {
+                alert("success");
+                window.location.reload();
+            }
+            else
+            {
+                alert("fail");
+                window.location.reload();
+            }
+        })
+    }
+    else
+    {
+        axios.post("/api/proprietor/reject",{
+            id: id
+        })
+        .then((response)=>{
+            var result = response.data.message;
+            if(result === "success")
+            {
+                alert("success");
+                window.location.reload();
+            }
+            else
+            {
+                alert("fail");
+                window.location.reload();
+            }
+        })
+    }
+    }
+
+    aptListButton = (isOccupied,id) =>{
         if(isOccupied === 2)
         {
             return(
@@ -64,7 +106,7 @@ export default class Pro_Dashboard extends Component {
         else if(isOccupied === 1)
         {
             return(
-                <Button color="warning">Waiting</Button>
+                <Button color="warning" onClick={()=>this.acceptRental(id)}>Waiting</Button>
             )
         }
         else
@@ -81,7 +123,7 @@ export default class Pro_Dashboard extends Component {
                 <td>{apartment.street}</td>
                 <td>{apartment.city}</td>
                 <td>${apartment.rent}</td>
-                <td>{this.aptListButton(apartment.isOccupied)}</td>
+                <td>{this.aptListButton(apartment.isOccupied,apartment.id)}</td>
                 <td>{apartment.telant_id}</td>
                 <td><button onClick={()=>this.DeleteApt(apartment.id)}>x</button></td>
             </tr>
