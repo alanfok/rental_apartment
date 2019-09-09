@@ -100,7 +100,7 @@ export default class Pro_Dashboard extends Component {
         if(isOccupied === 2)
         {
             return(
-                <Button color="secondary">Occupied</Button>
+                <Button color="secondary" onClick={()=>this.cancelHandler(id)}>Occupied</Button>
             )
         }
         else if(isOccupied === 1)
@@ -141,6 +141,33 @@ export default class Pro_Dashboard extends Component {
                 </tr>
             {list}</Table>
         )
+    }
+
+    cancelHandler = (id) =>{
+        var cancel = window.confirm("Do you want to cancel the contract with tenant");
+        if(cancel)
+        {
+            axios.post("/api/proprietor/reject",{
+                id: id
+            })
+            .then((response)=>{
+                var result = response.data.message;
+                if(result === "success")
+                {
+                    alert("success");
+                    window.location.reload();
+                }
+                else
+                {
+                    alert("fail");
+                    window.location.reload();
+                }
+            })
+        }
+        else
+        {
+
+        }
     }
 
     render() {
